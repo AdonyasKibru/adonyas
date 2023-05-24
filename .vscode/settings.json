@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "*.krb": "plaintext",
+        "*.tcc": "cpp",
+        "iosfwd": "cpp",
+        "unordered_map": "cpp",
+        "fstream": "cpp",
+        "iostream": "cpp",
+        "typeinfo": "cpp",
+        "sstream": "cpp"
+    }
+}
