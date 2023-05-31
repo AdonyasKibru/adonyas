@@ -8,18 +8,18 @@ using namespace std;
 
 // check enrollment system
 void test1() {
-  // EnrollmentSystem es;
-  // assert(es.addUniversity("UWB"));
+  EnrollmentSystem es;
+  assert(es.addUniversity("UWB"));
   // assert(!es.addUniversity("UWB"));
-  // assert(es.addUniversity("UW Seattle"));
-  // assert(es.addUniversity("UW Tacoma"));
+  assert(es.addUniversity("UW Seattle"));
+  assert(es.addUniversity("UW Tacoma"));
   // assert(!es.setCurrentUniversity("UWx"));
-  // assert(es.setCurrentUniversity("UWB"));
-  // assert(es.getUniversityName() == "UWB");
+  assert(es.setCurrentUniversity("UWB"));
+  assert(es.getUniversityName() == "UWB");
   // // read data
-  // assert(es.readCourseList("data-courses.txt"));
-  // assert(es.readStudentList("data-students.txt"));
-  // assert(es.readEnrollmentInfo("data-enrollments.txt"));
+  assert(es.readCourseList("data-courses.txt"));
+  assert(es.readStudentList("data-students.txt"));
+  assert(es.readEnrollmentInfo("data-enrollments.txt"));
   // // check courses
   // assert(!es.addCourse(999, "CSS342"));
   // assert(!es.addCourse(1070, "CSS3422"));

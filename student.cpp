@@ -5,4 +5,11 @@
 
 using namespace std;
 
-ostream &operator<<(ostream &out, const Student &student) { return out; }
+//ostream &operator<<(ostream &out, const Student &student) { return out; }
+
+Student::Student(const int &idNumber, const string &name)
+    : studentName(name), studentID(idNumber) {}
+// Student::~Student(){}
+//   bool Student::dropCourse(int studentID, const string &courseNumber){}
+//   bool Student::addCourse(int studentID, const string &courseNumber){}
+//   bool Student::isInCourse(int studentID, const string &courseNumber) const{}
