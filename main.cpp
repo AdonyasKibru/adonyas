@@ -10,10 +10,10 @@ using namespace std;
 void test1() {
   EnrollmentSystem es;
   assert(es.addUniversity("UWB"));
-  // assert(!es.addUniversity("UWB"));
+  assert(!es.addUniversity("UWB"));
   assert(es.addUniversity("UW Seattle"));
   assert(es.addUniversity("UW Tacoma"));
-  // assert(!es.setCurrentUniversity("UWx"));
+  assert(!es.setCurrentUniversity("UWx"));
   assert(es.setCurrentUniversity("UWB"));
   assert(es.getUniversityName() == "UWB");
   // // read data

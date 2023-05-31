@@ -44,9 +44,11 @@ public:
   // // returns the title for the course
   // string getCourseTitle(Course *course);
 
+
 private:
   string universityName;
   unordered_map<string, Course *> courses;
+  
 };
 
 #endif

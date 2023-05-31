@@ -13,14 +13,22 @@ using namespace std;
 
 // Add university to the enrollments system
 bool EnrollmentSystem::addUniversity(const string &name) {
-  universities[name] = new University(name);
-  return true;
+  if (universities[name] != nullptr) {
+    return false;
+  } else {
+    universities[name] = new University(name);
+    return true;
+  }
 }
 
 // Set this university as the active university for other functions
 bool EnrollmentSystem::setCurrentUniversity(const string &name) {
-  *currentUniversity = University(name);
-  return true;
+  if (universities[name] == nullptr) {
+    return false;
+  } else {
+    *currentUniversity = University(name);
+    return true;
+  }
 }
 
 // Return the current active university name
