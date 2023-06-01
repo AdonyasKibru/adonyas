@@ -78,10 +78,17 @@ bool EnrollmentSystem::readCourseList(const string &filename) {
   string line;
   while (getline(loadFile, line)) {
     string shortName;
-    string longName;
+    string longName = "";
 
     stringstream ss(line);
-    ss >> shortName >> longName;
+    ss >> shortName;
+    string val;
+    ss >> val;
+    longName += val;
+    while (ss >> val) {
+      longName += " ";
+      longName += val;
+    }
 
     courseList[shortName] = longName;
   }
@@ -131,6 +138,10 @@ bool EnrollmentSystem::dropCourse(int studentID, const string &courseNumber) {
 
 // Add student to the given course, return true if successful
 bool EnrollmentSystem::addCourse(int studentID, const string &courseNumber) {
+  if (EnrollmentSystem::isInCourse(studentID, courseNumber) ||
+      ((studentID / 1000) == 0) || (courseNumber.length() != 6)) {
+    return false;
+  }
   enrollmentInfo[studentID].push_back(courseNumber);
   return true;
 }
@@ -148,12 +159,14 @@ bool EnrollmentSystem::isInCourse(int studentID, const string &courseNumber) {
 // Return the courses student is enrolled in
 // The returned courses are separated by commas and sorted by course name
 string EnrollmentSystem::getEnrolledCourses(int studentID) {
-  string ans = enrollmentInfo[studentID][0];
+  string ans = "[";
+  ans += enrollmentInfo[studentID][0];
   for (int i = 1; i < enrollmentInfo[studentID].size(); i++) {
     sort(enrollmentInfo[studentID].begin(), enrollmentInfo[studentID].end());
     ans += ", ";
     ans += enrollmentInfo[studentID][i];
   }
+  ans += "]";
   return ans;
 }
 

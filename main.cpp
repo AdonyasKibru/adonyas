@@ -21,15 +21,15 @@ void test1() {
   assert(es.readStudentList("data-students.txt"));
   assert(es.readEnrollmentInfo("data-enrollments.txt"));
   // // check courses
-  // assert(!es.addCourse(999, "CSS342"));
-  // assert(!es.addCourse(1070, "CSS3422"));
-  // assert(!es.isInCourse(1070, "CSS342"));
-  // assert(es.addCourse(1070, "CSS342"));
-  // assert(es.dropCourse(1070, "CSS343"));
-  // assert(es.getCourseTitle("CSS342") ==
-  //        "Data Structures, Algorithms, and Discrete Mathematics I");
-  // // check enrollments
-  // assert(es.getEnrolledCourses(1070) == "[CSS110, CSS173, CSS342]");
+  assert(!es.addCourse(999, "CSS342"));
+  assert(!es.addCourse(1070, "CSS3422"));
+  assert(!es.isInCourse(1070, "CSS342"));
+  assert(es.addCourse(1070, "CSS342"));
+  assert(es.dropCourse(1070, "CSS343"));
+  assert(es.getCourseTitle("CSS342") ==
+         "Data Structures, Algorithms, and Discrete Mathematics I");
+  // check enrollments
+  assert(es.getEnrolledCourses(1070) == "[CSS110, CSS173, CSS342]");
   // string c342byLastName =
   //     "[Collins, Cassandra (1070), Evans, Juan (1401), Gonzalez, Holly
   //     (1223), " "Henderson, Daniel (1364), Taylor, Alexander (1986),

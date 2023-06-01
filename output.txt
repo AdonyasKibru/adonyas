@@ -1,0 +1,559 @@
+Thu Jun  1 05:56:20 UTC 2023
+Linux LinuxMachine 5.10.16.3-microsoft-standard-WSL2 #1 SMP Fri Apr 2 22:23:49 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+uid=1000(cssuwbstudent) gid=1000(cssuwbstudent) groups=1000(cssuwbstudent),10(wheel)
+=====================================================
+1. Compilation warnings are in the section below
+=====================================================
+=====================================================
+2. Program output are in the section below
+=====================================================
+./create-output.sh: line 38: 25716 Segmentation fault      $EXEC_PROGRAM
+=====================================================
+3. clang-tidy warnings are in the section below
+=====================================================
+58975 warnings generated.
+121942 warnings generated.
+178101 warnings generated.
+230484 warnings generated.
+282063 warnings generated.
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:18:5: error: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return,-warnings-as-errors]
+  } else {
+    ^~~~~~
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:28:5: error: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return,-warnings-as-errors]
+  } else {
+    ^~~~~~
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:51:3: error: kernel performance could be improved by unrolling this loop with a '#pragma unroll' directive [altera-unroll-loops,-warnings-as-errors]
+  while (getline(loadFile, line)) {
+  ^
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:52:9: error: variable 'id' is not initialized [cppcoreguidelines-init-variables,-warnings-as-errors]
+    int id;
+        ^
+           = 0
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:52:9: error: variable name 'id' is too short, expected at least 3 characters [readability-identifier-length,-warnings-as-errors]
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:83:5: note: inferred assignment of ID-dependent value from ID-dependent  [altera-id-dependent-backward-branch]
+    stringstream ss(line);
+    ^
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:81:12: error: redundant string initialization [readability-redundant-string-init,-warnings-as-errors]
+    string longName = "";
+           ^~~~~~~~~~~~~
+           longName
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:83:18: error: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length,-warnings-as-errors]
+    stringstream ss(line);
+                 ^
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:88:5: error: kernel performance could be improved by unrolling this loop with a '#pragma unroll' directive [altera-unroll-loops,-warnings-as-errors]
+    while (ss >> val) {
+    ^
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:88:12: error: backward branch (while loop) is ID-dependent due to variable reference to 'ss' and may cause performance degradation [altera-id-dependent-backward-branch,-warnings-as-errors]
+    while (ss >> val) {
+           ^
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:111:3: error: kernel performance could be improved by unrolling this loop with a '#pragma unroll' directive [altera-unroll-loops,-warnings-as-errors]
+  while (getline(loadFile, line)) {
+  ^
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:112:9: error: variable 'id' is not initialized [cppcoreguidelines-init-variables,-warnings-as-errors]
+    int id;
+        ^
+           = 0
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:112:9: error: variable name 'id' is too short, expected at least 3 characters [readability-identifier-length,-warnings-as-errors]
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:115:18: error: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length,-warnings-as-errors]
+    stringstream ss(line);
+                 ^
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:129:12: note: inferred assignment of ID-dependent value from ID-dependent  [altera-id-dependent-backward-branch]
+      for (int j = i; j < enrollmentInfo[studentID].size() - 1; j++) {
+           ^
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:129:7: error: kernel performance could be improved by unrolling this loop with a '#pragma unroll' directive [altera-unroll-loops,-warnings-as-errors]
+      for (int j = i; j < enrollmentInfo[studentID].size() - 1; j++) {
+      ^
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:129:23: error: backward branch (for loop) is ID-dependent due to variable reference to 'j' and may cause performance degradation [altera-id-dependent-backward-branch,-warnings-as-errors]
+      for (int j = i; j < enrollmentInfo[studentID].size() - 1; j++) {
+                      ^
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:151:3: error: kernel performance could be improved by unrolling this loop with a '#pragma unroll' directive [altera-unroll-loops,-warnings-as-errors]
+  for (int i = 0; i < enrollmentInfo[studentID].size(); i++) {
+  ^
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:151:3: error: use range-based for loop instead [modernize-loop-convert,-warnings-as-errors]
+  for (int i = 0; i < enrollmentInfo[studentID].size(); i++) {
+  ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      (auto & i : enrollmentInfo[studentID])
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:164:3: error: kernel performance could be improved by unrolling this loop with a '#pragma unroll' directive [altera-unroll-loops,-warnings-as-errors]
+  for (int i = 1; i < enrollmentInfo[studentID].size(); i++) {
+  ^
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.h:10:7: error: constructor does not initialize these fields: currentUniversity [cppcoreguidelines-pro-type-member-init,hicpp-member-init,-warnings-as-errors]
+class EnrollmentSystem {
+      ^
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/main.cpp:11:20: error: variable name 'es' is too short, expected at least 3 characters [readability-identifier-length,-warnings-as-errors]
+  EnrollmentSystem es;
+                   ^
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/student.cpp:10:39: error: pass by value and use std::move [modernize-pass-by-value,-warnings-as-errors]
+Student::Student(const int &idNumber, const string &name)
+                                      ^~~~~~~~~~~~~~
+                                      string 
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/university.cpp:10:24: error: pass by value and use std::move [modernize-pass-by-value,-warnings-as-errors]
+University::University(const string &name) : universityName(name) {}
+                       ^~~~~~~~~~~~~~
+                       string                               std::move( )
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/university.cpp:12:13: error: use '= default' to define a trivial destructor [hicpp-use-equals-default,modernize-use-equals-default,-warnings-as-errors]
+University::~University() {}
+            ^             ~~
+                          = default;
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/university.h:11:7: error: class 'University' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions,-warnings-as-errors]
+class University {
+      ^
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/university.h:15:3: error: single-argument constructors must be marked explicit to avoid unintentional implicit conversions [google-explicit-constructor,hicpp-explicit-conversions,-warnings-as-errors]
+  University(const string &name);
+  ^
+  explicit 
+Suppressed 282024 warnings (282024 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+25 warnings treated as errors
+=====================================================
+4. clang-format warnings are in the section below
+=====================================================
+Running clang-format on ./course.cpp
+9c9
+< //ostream &operator<<(ostream &out, const Course &course) { return out; }
+---
+> // ostream &operator<<(ostream &out, const Course &course) { return out; }
+Running clang-format on ./enrollmentsystem.cpp
+Running clang-format on ./main.cpp
+Running clang-format on ./student.cpp
+8c8
+< //ostream &operator<<(ostream &out, const Student &student) { return out; }
+---
+> // ostream &operator<<(ostream &out, const Student &student) { return out; }
+Running clang-format on ./university.cpp
+35c35,36
+< // vector<Student *> University::getClassListByLastName(const string &lastName) {}
+---
+> // vector<Student *> University::getClassListByLastName(const string &lastName)
+> // {}
+=====================================================
+5. Memory leak issues are in the section below
+=====================================================
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==26475==ERROR: AddressSanitizer: SEGV on unknown address 0x00100000000e (pc 0x7f4151c26435 bp 0x7ffe033a0580 sp 0x7ffe033a0520 T0)
+==26475==The signal is caused by a READ memory access.
+    #0 0x7f4151c26434 in std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/lib64/libstdc++.so.6+0x12d434)
+    #1 0x7f4151c2682c in std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/lib64/libstdc++.so.6+0x12d82c)
+    #2 0x404806 in University::operator=(University const&) (/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/a.out+0x404806)
+    #3 0x4029d2 in EnrollmentSystem::setCurrentUniversity(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:29
+    #4 0x414a39 in test1() /home/cssuwbstudent/2023win342d-p5-AdonyasKibru/main.cpp:17
+    #5 0x415b7b in main /home/cssuwbstudent/2023win342d-p5-AdonyasKibru/main.cpp:48
+    #6 0x7f41511d3d84 in __libc_start_main (/lib64/libc.so.6+0x3ad84)
+    #7 0x4026dd in _start (/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/a.out+0x4026dd)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/lib64/libstdc++.so.6+0x12d434) in std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+==26475==ABORTING
+=====================================================
+6. valgrind memory test is in the section below. Look for "definitely lost" 
+=====================================================
+./create-output.sh: line 91: 26536 Segmentation fault      valgrind --log-file="valgrind-output.txt" $EXEC_PROGRAM > /dev/null
+==26536== Memcheck, a memory error detector
+==26536== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==26536== Using Valgrind-3.19.0 and LibVEX; rerun with -h for copyright info
+==26536== Command: ./a.out
+==26536== Parent PID: 25633
+==26536== 
+==26536== Conditional jump or move depends on uninitialised value(s)
+==26536==    at 0x4F74433: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib64/libstdc++.so.6.0.25)
+==26536==    by 0x4F7482C: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib64/libstdc++.so.6.0.25)
+==26536==    by 0x402E9E: University::operator=(University const&) (university.h:11)
+==26536==    by 0x401EF4: EnrollmentSystem::setCurrentUniversity(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (enrollmentsystem.cpp:29)
+==26536==    by 0x409D82: test1() (main.cpp:17)
+==26536==    by 0x40A5B2: main (main.cpp:48)
+==26536== 
+==26536== Use of uninitialised value of size 8
+==26536==    at 0x4F74435: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib64/libstdc++.so.6.0.25)
+==26536==    by 0x4F7482C: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib64/libstdc++.so.6.0.25)
+==26536==    by 0x402E9E: University::operator=(University const&) (university.h:11)
+==26536==    by 0x401EF4: EnrollmentSystem::setCurrentUniversity(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (enrollmentsystem.cpp:29)
+==26536==    by 0x409D82: test1() (main.cpp:17)
+==26536==    by 0x40A5B2: main (main.cpp:48)
+==26536== 
+==26536== Invalid read of size 8
+==26536==    at 0x4F74435: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib64/libstdc++.so.6.0.25)
+==26536==    by 0x4F7482C: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib64/libstdc++.so.6.0.25)
+==26536==    by 0x402E9E: University::operator=(University const&) (university.h:11)
+==26536==    by 0x401EF4: EnrollmentSystem::setCurrentUniversity(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (enrollmentsystem.cpp:29)
+==26536==    by 0x409D82: test1() (main.cpp:17)
+==26536==    by 0x40A5B2: main (main.cpp:48)
+==26536==  Address 0x8 is not stack'd, malloc'd or (recently) free'd
+==26536== 
+==26536== 
+==26536== Process terminating with default action of signal 11 (SIGSEGV)
+==26536==  Access not within mapped region at address 0x8
+==26536==    at 0x4F74435: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib64/libstdc++.so.6.0.25)
+==26536==    by 0x4F7482C: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib64/libstdc++.so.6.0.25)
+==26536==    by 0x402E9E: University::operator=(University const&) (university.h:11)
+==26536==    by 0x401EF4: EnrollmentSystem::setCurrentUniversity(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (enrollmentsystem.cpp:29)
+==26536==    by 0x409D82: test1() (main.cpp:17)
+==26536==    by 0x40A5B2: main (main.cpp:48)
+==26536==  If you believe this happened as a result of a stack
+==26536==  overflow in your program's main thread (unlikely but
+==26536==  possible), you can try to increase the size of the
+==26536==  main thread stack using the --main-stacksize= flag.
+==26536==  The main thread stack size used in this run was 8388608.
+==26536== 
+==26536== HEAP SUMMARY:
+==26536==     in use at exit: 73,280 bytes in 8 blocks
+==26536==   total heap usage: 8 allocs, 0 frees, 73,280 bytes allocated
+==26536== 
+==26536== LEAK SUMMARY:
+==26536==    definitely lost: 0 bytes in 0 blocks
+==26536==    indirectly lost: 0 bytes in 0 blocks
+==26536==      possibly lost: 0 bytes in 0 blocks
+==26536==    still reachable: 73,280 bytes in 8 blocks
+==26536==         suppressed: 0 bytes in 0 blocks
+==26536== Rerun with --leak-check=full to see details of leaked memory
+==26536== 
+==26536== Use --track-origins=yes to see where uninitialised values come from
+==26536== For lists of detected and suppressed errors, rerun with: -s
+==26536== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
+=====================================================
+7. Code coverage information is in the section below
+=====================================================
+./check-code-coverage.sh: line 33: 26678 Segmentation fault      $EXEC_PROGRAM > /dev/null
+File '/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp':
+Name                                                                                                                             Regions    Miss   Cover     Lines    Miss   Cover  Branches    Miss   Cover
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EnrollmentSystem::addUniversity(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                4       4   0.00%         8       8   0.00%         2       2   0.00%
+EnrollmentSystem::setCurrentUniversity(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)         4       4   0.00%         8       8   0.00%         2       2   0.00%
+EnrollmentSystem::getUniversityName[abi:cxx11]() const                                                                                 1       1   0.00%         3       3   0.00%         0       0   0.00%
+EnrollmentSystem::readStudentList(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)              6       6   0.00%        20      20   0.00%         4       4   0.00%
+EnrollmentSystem::readCourseList(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)               8       8   0.00%        25      25   0.00%         6       6   0.00%
+EnrollmentSystem::readEnrollmentInfo(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)           6       6   0.00%        18      18   0.00%         4       4   0.00%
+EnrollmentSystem::dropCourse(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)             10      10   0.00%        12      12   0.00%         6       6   0.00%
+EnrollmentSystem::addCourse(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)               8       8   0.00%         8       8   0.00%         6       6   0.00%
+EnrollmentSystem::isInCourse(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)              7       7   0.00%         8       8   0.00%         4       4   0.00%
+EnrollmentSystem::getEnrolledCourses[abi:cxx11](int)                                                                                   4       4   0.00%        11      11   0.00%         2       2   0.00%
+EnrollmentSystem::getCourseTitle(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)               1       1   0.00%         3       3   0.00%         0       0   0.00%
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                                                                 59      59   0.00%       124     124   0.00%        36      36   0.00%
+
+File '/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/main.cpp':
+Name                                                                                                                             Regions    Miss   Cover     Lines    Miss   Cover  Branches    Miss   Cover
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+test1()                                                                                                                                1       1   0.00%        21      21   0.00%         0       0   0.00%
+main                                                                                                                                   1       1   0.00%         4       4   0.00%         0       0   0.00%
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                                                                  2       2   0.00%        25      25   0.00%         0       0   0.00%
+
+File '/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/student.cpp':
+Name                                                                                                                             Regions    Miss   Cover     Lines    Miss   Cover  Branches    Miss   Cover
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Student::Student(int const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                   1       1   0.00%         1       1   0.00%         0       0   0.00%
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                                                                  1       1   0.00%         1       1   0.00%         0       0   0.00%
+
+File '/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/university.cpp':
+Name                                                                                                                             Regions    Miss   Cover     Lines    Miss   Cover  Branches    Miss   Cover
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+University::University(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                         1       1   0.00%         1       1   0.00%         0       0   0.00%
+University::~University()                                                                                                              1       1   0.00%         1       1   0.00%         0       0   0.00%
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                                                                  2       2   0.00%         2       2   0.00%         0       0   0.00%
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:
+    1|       |#include "enrollmentsystem.h"
+    2|       |#include "university.h"
+    3|       |
+    4|       |#include <algorithm>
+    5|       |#include <cassert>
+    6|       |#include <fstream>
+    7|       |#include <iostream>
+    8|       |#include <map>
+    9|       |#include <sstream>
+   10|       |#include <vector>
+   11|       |
+   12|       |using namespace std;
+   13|       |
+   14|       |// Add university to the enrollments system
+   15|      0|bool EnrollmentSystem::addUniversity(const string &name) {
+   16|      0|  if (universities[name] != nullptr) {
+   17|      0|    return false;
+   18|      0|  } else {
+   19|      0|    universities[name] = new University(name);
+   20|      0|    return true;
+   21|      0|  }
+   22|      0|}
+   23|       |
+   24|       |// Set this university as the active university for other functions
+   25|      0|bool EnrollmentSystem::setCurrentUniversity(const string &name) {
+   26|      0|  if (universities[name] == nullptr) {
+   27|      0|    return false;
+   28|      0|  } else {
+   29|      0|    *currentUniversity = University(name);
+   30|      0|    return true;
+   31|      0|  }
+   32|      0|}
+   33|       |
+   34|       |// Return the current active university name
+   35|      0|string EnrollmentSystem::getUniversityName() const {
+   36|      0|  return currentUniversity->universityName;
+   37|      0|}
+   38|       |
+   39|       |// Read the student list for current active university
+   40|       |// return true if file successfully read
+   41|      0|bool EnrollmentSystem::readStudentList(const string &filename) {
+   42|      0|  ifstream loadFile;
+   43|      0|  loadFile.open(filename);
+   44|       |
+   45|      0|  if (!loadFile.is_open()) {
+   46|      0|    cerr << "The file " << filename << "  can not be opend!" << endl;
+   47|      0|    return false;
+   48|      0|  }
+   49|       |
+   50|      0|  string line;
+   51|      0|  while (getline(loadFile, line)) {
+   52|      0|    int id;
+   53|      0|    string firstName;
+   54|      0|    string lastName;
+   55|       |
+   56|      0|    stringstream studentData(line);
+   57|      0|    studentData >> id >> firstName >> lastName;
+   58|       |
+   59|      0|    students[id].push_back(firstName);
+   60|      0|    students[id].push_back(lastName);
+   61|      0|  }
+   62|       |
+   63|      0|  loadFile.close();
+   64|      0|  return true;
+   65|      0|}
+   66|       |
+   67|       |// Read the course list for current active university
+   68|       |// return true if file successfully read
+   69|      0|bool EnrollmentSystem::readCourseList(const string &filename) {
+   70|      0|  ifstream loadFile;
+   71|      0|  loadFile.open(filename);
+   72|       |
+   73|      0|  if (!loadFile.is_open()) {
+   74|      0|    cerr << "The file " << filename << "  is not open";
+   75|      0|    return false;
+   76|      0|  }
+   77|       |
+   78|      0|  string line;
+   79|      0|  while (getline(loadFile, line)) {
+   80|      0|    string shortName;
+   81|      0|    string longName = "";
+   82|       |
+   83|      0|    stringstream ss(line);
+   84|      0|    ss >> shortName;
+   85|      0|    string val;
+   86|      0|    ss >> val;
+   87|      0|    longName += val;
+   88|      0|    while (ss >> val) {
+   89|      0|      longName += " ";
+   90|      0|      longName += val;
+   91|      0|    }
+   92|       |
+   93|      0|    courseList[shortName] = longName;
+   94|      0|  }
+   95|      0|  loadFile.close();
+   96|      0|  return true;
+   97|      0|}
+   98|       |
+   99|       |// Read the student enrollment information for current active university
+  100|       |// return true if file successfully read
+  101|      0|bool EnrollmentSystem::readEnrollmentInfo(const string &filename) {
+  102|      0|  ifstream loadFile;
+  103|      0|  loadFile.open(filename);
+  104|       |
+  105|      0|  if (!loadFile.is_open()) {
+  106|      0|    cerr << "This file " << filename << " is not opened." << endl;
+  107|      0|    return false;
+  108|      0|  }
+  109|       |
+  110|      0|  string line;
+  111|      0|  while (getline(loadFile, line)) {
+  112|      0|    int id;
+  113|      0|    string shortName;
+  114|       |
+  115|      0|    stringstream ss(line);
+  116|      0|    ss >> id >> shortName;
+  117|       |
+  118|      0|    enrollmentInfo[id].push_back(shortName);
+  119|      0|  }
+  120|       |
+  121|      0|  loadFile.close();
+  122|      0|  return true;
+  123|      0|}
+  124|       |
+  125|       |// Drop student from given course, return true if successful
+  126|      0|bool EnrollmentSystem::dropCourse(int studentID, const string &courseNumber) {
+  127|      0|  for (int i = 0; i < enrollmentInfo[studentID].size(); i++) {
+  128|      0|    if (enrollmentInfo[studentID][i] == courseNumber) {
+  129|      0|      for (int j = i; j < enrollmentInfo[studentID].size() - 1; j++) {
+  130|      0|        enrollmentInfo[studentID][j] = enrollmentInfo[studentID][j + 1];
+  131|      0|      }
+  132|      0|      enrollmentInfo[studentID].pop_back();
+  133|      0|      return true;
+  134|      0|    }
+  135|      0|  }
+  136|      0|  return false;
+  137|      0|}
+  138|       |
+  139|       |// Add student to the given course, return true if successful
+  140|      0|bool EnrollmentSystem::addCourse(int studentID, const string &courseNumber) {
+  141|      0|  if (EnrollmentSystem::isInCourse(studentID, courseNumber) ||
+  142|      0|      ((studentID / 1000) == 0) || (courseNumber.length() != 6)) {
+  143|      0|    return false;
+  144|      0|  }
+  145|      0|  enrollmentInfo[studentID].push_back(courseNumber);
+  146|      0|  return true;
+  147|      0|}
+  148|       |
+  149|       |// Return true if student is in the given course
+  150|      0|bool EnrollmentSystem::isInCourse(int studentID, const string &courseNumber) {
+  151|      0|  for (int i = 0; i < enrollmentInfo[studentID].size(); i++) {
+  152|      0|    if (enrollmentInfo[studentID][i] == courseNumber) {
+  153|      0|      return true;
+  154|      0|    }
+  155|      0|  }
+  156|      0|  return false;
+  157|      0|}
+  158|       |
+  159|       |// Return the courses student is enrolled in
+  160|       |// The returned courses are separated by commas and sorted by course name
+  161|      0|string EnrollmentSystem::getEnrolledCourses(int studentID) {
+  162|      0|  string ans = "[";
+  163|      0|  ans += enrollmentInfo[studentID][0];
+  164|      0|  for (int i = 1; i < enrollmentInfo[studentID].size(); i++) {
+  165|      0|    sort(enrollmentInfo[studentID].begin(), enrollmentInfo[studentID].end());
+  166|      0|    ans += ", ";
+  167|      0|    ans += enrollmentInfo[studentID][i];
+  168|      0|  }
+  169|      0|  ans += "]";
+  170|      0|  return ans;
+  171|      0|}
+  172|       |
+  173|       |// Return the title for the course
+  174|      0|string EnrollmentSystem::getCourseTitle(const string &courseNumber) {
+  175|      0|  return courseList[courseNumber];
+  176|      0|}
+  177|       |
+  178|       |// // Return class list sorted by last name of students
+  179|       |// string
+  180|       |// EnrollmentSystem::getClassListByLastName(const string &courseNumber) const {}
+  181|       |
+  182|       |// // Return class list sorted by id of students
+  183|       |// string EnrollmentSystem::getClassListByID(const string &courseNumber) const
+  184|       |// {}
+
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/main.cpp:
+    1|       |
+    2|       |#include "enrollmentsystem.h"
+    3|       |#include <cassert>
+    4|       |#include <iostream>
+    5|       |#include <sstream>
+    6|       |
+    7|       |using namespace std;
+    8|       |
+    9|       |// check enrollment system
+   10|      0|void test1() {
+   11|      0|  EnrollmentSystem es;
+   12|      0|  assert(es.addUniversity("UWB"));
+   13|      0|  assert(!es.addUniversity("UWB"));
+   14|      0|  assert(es.addUniversity("UW Seattle"));
+   15|      0|  assert(es.addUniversity("UW Tacoma"));
+   16|      0|  assert(!es.setCurrentUniversity("UWx"));
+   17|      0|  assert(es.setCurrentUniversity("UWB"));
+   18|      0|  assert(es.getUniversityName() == "UWB");
+   19|       |  // // read data
+   20|      0|  assert(es.readCourseList("data-courses.txt"));
+   21|      0|  assert(es.readStudentList("data-students.txt"));
+   22|      0|  assert(es.readEnrollmentInfo("data-enrollments.txt"));
+   23|       |  // // check courses
+   24|      0|  assert(!es.addCourse(999, "CSS342"));
+   25|      0|  assert(!es.addCourse(1070, "CSS3422"));
+   26|      0|  assert(!es.isInCourse(1070, "CSS342"));
+   27|      0|  assert(es.addCourse(1070, "CSS342"));
+   28|      0|  assert(es.dropCourse(1070, "CSS343"));
+   29|      0|  assert(es.getCourseTitle("CSS342") ==
+   30|      0|         "Data Structures, Algorithms, and Discrete Mathematics I");
+   31|       |  // check enrollments
+   32|      0|  assert(es.getEnrolledCourses(1070) == "[CSS110, CSS173, CSS342]");
+   33|       |  // string c342byLastName =
+   34|       |  //     "[Collins, Cassandra (1070), Evans, Juan (1401), Gonzalez, Holly
+   35|       |  //     (1223), " "Henderson, Daniel (1364), Taylor, Alexander (1986),
+   36|       |  //     Thompson, Christine "
+   37|       |  //     "(1386), Watson, Alex (1211)]";
+   38|       |  // assert(es.getClassListByLastName("CSS342") == c342byLastName);
+   39|       |  // string c342byID =
+   40|       |  //     "[Collins, Cassandra (1070), Watson, Alex (1211), Gonzalez, Holly "
+   41|       |  //     "(1223), Henderson, Daniel (1364), Thompson, Christine (1386), Evans, "
+   42|       |  //     "Juan (1401), Taylor, Alexander (1986)]";
+   43|       |  // assert(es.getClassListByID("CSS342") == c342byID);
+   44|      0|}
+   45|       |
+   46|       |// run all tests
+   47|      0|int main() {
+   48|      0|  test1();
+   49|       |
+   50|      0|  cout << "Done." << endl;
+   51|      0|}
+
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/student.cpp:
+    1|       |#include "student.h"
+    2|       |#include "course.h"
+    3|       |
+    4|       |#include <sstream>
+    5|       |
+    6|       |using namespace std;
+    7|       |
+    8|       |//ostream &operator<<(ostream &out, const Student &student) { return out; }
+    9|       |
+   10|       |Student::Student(const int &idNumber, const string &name)
+   11|      0|    : studentName(name), studentID(idNumber) {}
+   12|       |// Student::~Student(){}
+   13|       |//   bool Student::dropCourse(int studentID, const string &courseNumber){}
+   14|       |//   bool Student::addCourse(int studentID, const string &courseNumber){}
+   15|       |//   bool Student::isInCourse(int studentID, const string &courseNumber) const{}
+
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/university.cpp:
+    1|       |#include "university.h"
+    2|       |#include "student.h"
+    3|       |
+    4|       |#include <cassert>
+    5|       |#include <fstream>
+    6|       |#include <iostream>
+    7|       |
+    8|       |using namespace std;
+    9|       |
+   10|      0|University::University(const string &name) : universityName(name) {}
+   11|       |
+   12|      0|University::~University() {}
+   13|       |
+   14|       |// // parses a student list from a .txt file
+   15|       |// void University::readStudentList(const string &filename) {}
+   16|       |
+   17|       |// // parses course list from a .txt file
+   18|       |// void University::readCourseList(const string &filename) {}
+   19|       |
+   20|       |// // parses enrollment info from a .txt file
+   21|       |// void University::readEnrollmentInfo(const string &filename) {}
+   22|       |
+   23|       |// // adds a course to this enrollment system.
+   24|       |// void University::addCourse(Course *course) {}
+   25|       |
+   26|       |// // removes a course from this enrollment system.
+   27|       |// void University::dropCourse(Course *course) {}
+   28|       |
+   29|       |// // checks if a student is in a given course.
+   30|       |// bool University::isInCourse(Student *student, Course *course) {}
+   31|       |
+   32|       |// // returns a list of courses this student is enrolled in.
+   33|       |// vector<Course *> University::getEnrolledCourses(Student *student) {}
+   34|       |// // returns class list sorted by last name of the students
+   35|       |// vector<Student *> University::getClassListByLastName(const string &lastName) {}
+   36|       |
+   37|       |// // return class list sorted by ID of the students
+   38|       |// vector<Student *> University::getClassListByID(const string &studentID) {}
+   39|       |
+   40|       |// // returns the title for the course
+   41|       |// string University::getCourseTitle(Course *course) {}
+
+Thu Jun  1 05:57:01 UTC 2023
+=====================================================
+To create an output.txt file with all the output from this script
+Run the below command
+      ./create-output.sh > output.txt 2>&1 
+=====================================================
