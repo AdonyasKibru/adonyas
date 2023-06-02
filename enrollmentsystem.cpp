@@ -26,7 +26,7 @@ bool EnrollmentSystem::setCurrentUniversity(const string &name) {
   if (universities[name] == nullptr) {
     return false;
   } else {
-    *currentUniversity = University(name);
+    currentUniversity = universities[name];
     return true;
   }
 }
@@ -34,6 +34,22 @@ bool EnrollmentSystem::setCurrentUniversity(const string &name) {
 // Return the current active university name
 string EnrollmentSystem::getUniversityName() const {
   return currentUniversity->universityName;
+}
+
+// Return the courses student is enrolled in
+// The returned courses are separated by commas and sorted by course name
+string EnrollmentSystem::getEnrolledCourses(int studentID) {
+  string ans = "[";
+  const auto &enrolledCourses = enrollmentInfo[studentID];
+  if (!enrolledCourses.empty()) {
+    ans += enrolledCourses[0];
+    for (int i = 1; i < enrolledCourses.size(); i++) {
+      ans += ", ";
+      ans += enrolledCourses[i];
+    }
+  }
+  ans += "]";
+  return ans;
 }
 
 // Read the student list for current active university
@@ -56,8 +72,7 @@ bool EnrollmentSystem::readStudentList(const string &filename) {
     stringstream studentData(line);
     studentData >> id >> firstName >> lastName;
 
-    students[id].push_back(firstName);
-    students[id].push_back(lastName);
+    students.push_back(new Student(id, lastName, firstName));
   }
 
   loadFile.close();
@@ -90,7 +105,7 @@ bool EnrollmentSystem::readCourseList(const string &filename) {
       longName += val;
     }
 
-    courseList[shortName] = longName;
+    courses[shortName] = new Course(shortName, longName);
   }
   loadFile.close();
   return true;
@@ -136,7 +151,6 @@ bool EnrollmentSystem::dropCourse(int studentID, const string &courseNumber) {
   return false;
 }
 
-// Add student to the given course, return true if successful
 bool EnrollmentSystem::addCourse(int studentID, const string &courseNumber) {
   if (EnrollmentSystem::isInCourse(studentID, courseNumber) ||
       ((studentID / 1000) == 0) || (courseNumber.length() != 6)) {
@@ -147,10 +161,14 @@ bool EnrollmentSystem::addCourse(int studentID, const string &courseNumber) {
 }
 
 // Return true if student is in the given course
-bool EnrollmentSystem::isInCourse(int studentID, const string &courseNumber) {
-  for (int i = 0; i < enrollmentInfo[studentID].size(); i++) {
-    if (enrollmentInfo[studentID][i] == courseNumber) {
-      return true;
+bool EnrollmentSystem::isInCourse(int studentID,
+                                  const string &courseNumber) const {
+  const auto &enrolledCourses = enrollmentInfo.find(studentID);
+  if (enrolledCourses != enrollmentInfo.end()) {
+    for (const string &course : enrolledCourses->second) {
+      if (course == courseNumber) {
+        return true;
+      }
     }
   }
   return false;
@@ -158,27 +176,63 @@ bool EnrollmentSystem::isInCourse(int studentID, const string &courseNumber) {
 
 // Return the courses student is enrolled in
 // The returned courses are separated by commas and sorted by course name
-string EnrollmentSystem::getEnrolledCourses(int studentID) {
+string EnrollmentSystem::getEnrolledCourses(int studentID) const {
+  if (enrollmentInfo.find(studentID) == enrollmentInfo.end()) {
+    return "[]";
+  }
+  vector<string> enrolledCourses = enrollmentInfo.at(studentID);
+  sort(enrolledCourses.begin(), enrolledCourses.end());
+
   string ans = "[";
-  ans += enrollmentInfo[studentID][0];
-  for (int i = 1; i < enrollmentInfo[studentID].size(); i++) {
-    sort(enrollmentInfo[studentID].begin(), enrollmentInfo[studentID].end());
+  ans += enrolledCourses[0];
+  for (int i = 1; i < enrolledCourses.size(); i++) {
     ans += ", ";
-    ans += enrollmentInfo[studentID][i];
+    ans += enrolledCourses[i];
   }
   ans += "]";
   return ans;
 }
 
-// Return the title for the course
-string EnrollmentSystem::getCourseTitle(const string &courseNumber) {
-  return courseList[courseNumber];
+// string
+// EnrollmentSystem::getClassListByLastName(const string &courseNumber) const {
+//   vector<Student *> classList = courses[courseNumber]->getClassListByLastName();
+//   sort(classList.begin(), classList.end(), cmpLastName);
+//   // Format the class list into a string separated by commas
+//   string result;
+//   for (const auto student : classList) {
+//     result += student->getFullName() + ", ";
+//   }
+//   // Remove the trailing comma and space
+//   if (!result.empty()) {
+//     result = result.substr(0, result.length() - 2);
+//   }
+//   return result;
+// }
+
+// string EnrollmentSystem::getClassListByID(const string &courseNumber) const {
+//   vector<Student *> classList = stu;
+//   sort(classList.begin(), classList.end(), cmpID);
+//   // Format the class list into a string separated by commas
+//   string result;
+//   for (const auto student : classList) {
+//     result += student->studentLastName + ", ";
+//   }
+//   // Remove the trailing comma and space
+//   if (!result.empty()) {
+//     result = result.substr(0, result.length() - 2);
+//   }
+//   return result;
+// }
+
+bool EnrollmentSystem::cmpLastName(const Student *s1, const Student *s2) {
+  return (s1->studentLastName < s2->studentLastName);
 }
 
-// // Return class list sorted by last name of students
-// string
-// EnrollmentSystem::getClassListByLastName(const string &courseNumber) const {}
+bool EnrollmentSystem::cmpID(const Student *s1, const Student *s2) {
+  return (s1->studentID < s2->studentID);
+}
 
-// // Return class list sorted by id of students
-// string EnrollmentSystem::getClassListByID(const string &courseNumber) const
-// {}
+// Return the title for the course
+string EnrollmentSystem::getCourseTitle(const string &courseNumber) {
+  return courses[courseNumber]->courseName;
+}

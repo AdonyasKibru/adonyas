@@ -15,40 +15,39 @@ public:
   University(const string &name);
   virtual ~University();
 
-  // // parses a student list from a .txt file
-  // void readStudentList(const string &filename);
+  // Read the student list for current active university
+  // return true if file successfully read
+  bool readStudentList(const string &filename);
 
-  // // parses course list from a .txt file
-  // void readCourseList(const string &filename);
+  // Read the course list for current active university
+  // return true if file successfully read
+  bool readCourseList(const string &filename);
 
-  // // parses enrollment info from a .txt file
-  // void readEnrollmentInfo(const string &filename);
+  // Read the student enrollment information for current active university
+  // return true if file successfully read
+  bool readEnrollmentInfo(const string &filename);
 
-  // // adds a course to this enrollment system.
-  // void addCourse(Course *course);
+  bool dropCourse(int studentID, const string &courseNumber);
+  bool addCourse(int studentID, const string &courseNumber);
+  bool isInCourse(int studentID, const string &courseNumber) const;
 
-  // // removes a course from this enrollment system.
-  // void dropCourse(Course *course);
+  // Return the courses student is enrolled in
+  // The returned courses are separated by commas and sorted by course name
+  string getEnrolledCourses(int studentID) const;
 
-  // // checks if a student is in a given course.
-  // bool isInCourse(Student *student, Course *course);
-
-  // // returns a list of courses this student is enrolled in.
-  // vector<Course *> getEnrolledCourses(Student *student);
-  // // returns class list sorted by last name of the students
-  // vector<Student *> getClassListByLastName(const string &lastName);
-
-  // // return class list sorted by ID of the students
-  // vector<Student *> getClassListByID(const string &studentID);
-
-  // // returns the title for the course
-  // string getCourseTitle(Course *course);
-
+  vector<Student *> getClassListByLastName();
+  vector<Student *> getClassListByID();
+  bool cmpLastName(const Student *s1, const Student *s2);
+  bool cmpID(const Student *s1, const Student *s2);
+    // Return the title for the course
+  string getCourseTitle(const string &courseNumber);
 
 private:
   string universityName;
+  vector<University *> universties;
+  vector<Student *> students;
   unordered_map<string, Course *> courses;
-  
+  unordered_map<int, vector<string>> enrollmentInfo;
 };
 
 #endif

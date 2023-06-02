@@ -19,6 +19,10 @@ public:
   // Return the current active university name
   string getUniversityName() const;
 
+  // Return the courses student is enrolled in
+  // The returned courses are separated by commas and sorted by course name
+  string getEnrolledCourses(int studentID);
+
   // Read the student list for current active university
   // return true if file successfully read
   bool readStudentList(const string &filename);
@@ -31,27 +35,24 @@ public:
   // return true if file successfully read
   bool readEnrollmentInfo(const string &filename);
 
-  // Drop student from given course, return true if successful
   bool dropCourse(int studentID, const string &courseNumber);
-
-  // Add student to the given course, return true if successful
   bool addCourse(int studentID, const string &courseNumber);
-
-  // Return true if student is in the given course
-  bool isInCourse(int studentID, const string &courseNumber);
+  bool isInCourse(int studentID, const string &courseNumber) const;
 
   // Return the courses student is enrolled in
   // The returned courses are separated by commas and sorted by course name
-  string getEnrolledCourses(int studentID);
+  string getEnrolledCourses(int studentID) const;
 
-  // Return the title for the course
-  string getCourseTitle(const string &courseNumber);
-
-  // // Return class list sorted by last name of students
-  // string getClassListByLastName(const string &courseNumber);
+  //   // Return class list sorted by last name of students
+  // string getClassListByLastName(const string &courseNumber) const;
 
   // // Return class list sorted by id of students
-  // string getClassListByID(const string &courseNumber);
+  // string getClassListByID(const string &courseNumber) const;
+
+  bool cmpLastName(const Student *s1, const Student *s2);
+  bool cmpID(const Student *s1, const Student *s2);
+  // Return the title for the course
+  string getCourseTitle(const string &courseNumber);
 
 private:
   // current active university
@@ -60,11 +61,9 @@ private:
   // Store of known universities
   map<string, University *> universities;
 
-  // store the student ID and their names from the text
-  unordered_map<int, vector<string>> students;
-
-  unordered_map<string, string> courseList;
-
+  vector<University *> universties;
+  vector<Student *> students;
+  unordered_map<string, Course *> courses;
   unordered_map<int, vector<string>> enrollmentInfo;
 };
 
