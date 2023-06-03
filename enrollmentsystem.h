@@ -39,10 +39,6 @@ public:
   bool addCourse(int studentID, const string &courseNumber);
   bool isInCourse(int studentID, const string &courseNumber) const;
 
-  // Return the courses student is enrolled in
-  // The returned courses are separated by commas and sorted by course name
-  string getEnrolledCourses(int studentID) const;
-
   //   // Return class list sorted by last name of students
   // string getClassListByLastName(const string &courseNumber) const;
 
@@ -58,13 +54,9 @@ private:
   // current active university
   University *currentUniversity;
 
-  // Store of known universities
-  map<string, University *> universities;
-
   vector<University *> universties;
-  vector<Student *> students;
-  unordered_map<string, Course *> courses;
-  unordered_map<int, vector<string>> enrollmentInfo;
+
+  // unordered_map<int, vector<string>> enrollmentInfo;
 };
 
 #endif

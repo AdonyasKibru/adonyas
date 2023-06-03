@@ -18,6 +18,7 @@ class Course {
   friend ostream &operator<<(ostream &out, const Course &course);
 
 public:
+  Course(const string &courseID);
   Course(const string &courseID, const string &courseName);
   virtual ~Course();
   void addStudent(Student *student);
@@ -34,7 +35,7 @@ private:
   string courseName;
 
   // store the student ID and their names from the text
-  vector<Student*> students;
+  unordered_map<string, vector<Student*>> students;
 };
 
 #endif

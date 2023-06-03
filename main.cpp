@@ -16,29 +16,26 @@ void test1() {
   assert(!es.setCurrentUniversity("UWx"));
   assert(es.setCurrentUniversity("UWB"));
   assert(es.getUniversityName() == "UWB");
-  // // // read data
+  // // // // read data
   assert(es.readCourseList("data-courses.txt"));
   assert(es.readStudentList("data-students.txt"));
   assert(es.readEnrollmentInfo("data-enrollments.txt"));
-  // check courses
+  // // check courses
   assert(!es.addCourse(999, "CSS342"));
   assert(!es.addCourse(1070, "CSS3422"));
   assert(!es.isInCourse(1070, "CSS342"));
+
   assert(es.addCourse(1070, "CSS342"));
   assert(es.dropCourse(1070, "CSS343"));
   assert(es.getCourseTitle("CSS342") ==
          "Data Structures, Algorithms, and Discrete Mathematics I");
-  // // check enrollments
-
+  // check enrollments
   assert(es.getEnrolledCourses(1070) == "[CSS110, CSS173, CSS342]");
-  string c342byLastName =
-      "[Collins, Cassandra (1070), Evans, Juan (1401), Gonzalez, Holly (1223), "
-      "Henderson, Daniel (1364), Taylor, Alexander (1986),Thompson, Christine "
-      "(1386), Watson, Alex (1211)]";
-  // stringstream outSS;
-  // outSS.str("");
-  // outSS << es.getClassListByLastName("CSS342");
-  // cout << outSS.str();
+  // string c342byLastName =
+  //     "[Collins, Cassandra (1070), Evans, Juan (1401), Gonzalez, Holly
+  //     (1223), " "Henderson, Daniel (1364), Taylor, Alexander (1986),Thompson,
+  //     Christine "
+  //     "(1386), Watson, Alex (1211)]";
   // assert(es.getClassListByLastName("CSS342") == c342byLastName);
   //  string c342byID =
   //      "[Collins, Cassandra (1070), Watson, Alex (1211), Gonzalez, Holly "

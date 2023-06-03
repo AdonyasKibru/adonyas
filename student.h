@@ -27,7 +27,8 @@ private:
   string studentLastName;
   string studentfirstName;
   int studentID;
-  unordered_map<int, vector<string>> enrollmentInfo;
+
+  unordered_map<int, vector<Course *>> enrollmentInfo;
 };
 
 #endif

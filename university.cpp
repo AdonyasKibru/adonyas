@@ -10,7 +10,15 @@ using namespace std;
 
 University::University(const string &name) : universityName(name) {}
 
-University::~University() {}
+University::~University() {
+  for (Student *student : uniStudents) {
+    delete student;
+  }
+
+  for (Course *course : Courses) {
+    delete course;
+  }
+}
 
 // Read the student list for current active university
 // return true if file successfully read
@@ -32,9 +40,8 @@ bool University::readStudentList(const string &filename) {
     stringstream studentData(line);
     studentData >> id >> firstName >> lastName;
 
-    students.push_back(new Student(id, lastName, firstName));
+    uniStudents.push_back(new Student(id, lastName, firstName));
   }
-
   loadFile.close();
   return true;
 }
@@ -65,7 +72,7 @@ bool University::readCourseList(const string &filename) {
       longName += val;
     }
 
-    courses[shortName] = new Course(shortName, longName);
+    Courses.push_back(new Course(shortName, longName));
   }
   loadFile.close();
   return true;
@@ -90,7 +97,9 @@ bool University::readEnrollmentInfo(const string &filename) {
     stringstream ss(line);
     ss >> id >> shortName;
 
-    enrollmentInfo[id].push_back(shortName);
+    for (Student *value : uniStudents) {
+      value->addCourse(id, shortName);
+    }
   }
 
   loadFile.close();
@@ -99,32 +108,28 @@ bool University::readEnrollmentInfo(const string &filename) {
 
 // Drop student from given course, return true if successful
 bool University::dropCourse(int studentID, const string &courseNumber) {
-  auto &enrolledCourses = enrollmentInfo[studentID];
-  auto it = find(enrolledCourses.begin(), enrolledCourses.end(), courseNumber);
-  if (it != enrolledCourses.end()) {
-    enrolledCourses.erase(it);
-    return true;
+  for (Student *student : uniStudents) {
+    if (student->dropCourse(studentID, courseNumber))
+      return true;
   }
   return false;
 }
 
 bool University::addCourse(int studentID, const string &courseNumber) {
-  if (University::isInCourse(studentID, courseNumber) ||
-      ((studentID / 1000) == 0) || (courseNumber.length() != 6)) {
-    return false;
+  bool ans = false;
+  for (Student *student : uniStudents) {
+    if (student->addCourse(studentID, courseNumber)) {
+      ans = true;
+    }
   }
-  enrollmentInfo[studentID].push_back(courseNumber);
-  return true;
+  return ans;
 }
 
 // Return true if student is in the given course
 bool University::isInCourse(int studentID, const string &courseNumber) const {
-  const auto &enrolledCourses = enrollmentInfo.find(studentID);
-  if (enrolledCourses != enrollmentInfo.end()) {
-    for (const string &course : enrolledCourses->second) {
-      if (course == courseNumber) {
-        return true;
-      }
+  for (const Student *student : uniStudents) {
+    if (student->studentID == studentID) {
+      return student->isInCourse(studentID, courseNumber);
     }
   }
   return false;
@@ -133,31 +138,26 @@ bool University::isInCourse(int studentID, const string &courseNumber) const {
 // Return the courses student is enrolled in
 // The returned courses are separated by commas and sorted by course name
 string University::getEnrolledCourses(int studentID) const {
-  if (enrollmentInfo.find(studentID) == enrollmentInfo.end()) {
-    return "[]";
-  }
-  vector<string> enrolledCourses = enrollmentInfo.at(studentID);
-  sort(enrolledCourses.begin(), enrolledCourses.end());
-
   string ans = "[";
-  ans += enrolledCourses[0];
-  for (int i = 1; i < enrolledCourses.size(); i++) {
+  Student *value = uniStudents[0];
+  ans = ans + value->enrollmentInfo[studentID][0]->courseID;
+  for (int i = 1; i < value->enrollmentInfo[studentID].size(); i++) {
     ans += ", ";
-    ans += enrolledCourses[i];
+    ans += value->enrollmentInfo[studentID][i]->courseID;
   }
   ans += "]";
   return ans;
 }
 
-vector<Student *> University::getClassListByLastName() {
-  // sort(students.begin(), students.end(), cmpLastName);
-  return students;
-}
+// vector<Student *> University::getClassListByLastName() {
+//   // sort(students.begin(), students.end(), cmpLastName);
+//   return students;
+// }
 
-vector<Student *> University::getClassListByID() {
-  // sort(students.begin(), students.end(), cmpID);
-  return students;
-}
+// vector<Student *> University::getClassListByID() {
+//   // sort(students.begin(), students.end(), cmpID);
+//   return students;
+// }
 
 bool University::cmpLastName(const Student *s1, const Student *s2) {
   return (s1->studentLastName > s2->studentLastName);
@@ -169,5 +169,11 @@ bool University::cmpID(const Student *s1, const Student *s2) {
 
 // Return the title for the course
 string University::getCourseTitle(const string &courseNumber) {
-  return courses[courseNumber]->courseName;
+  string answer;
+  for (Course *val : Courses) {
+    if (val->courseID == courseNumber) {
+      answer = val->courseName;
+    }
+  }
+  return answer;
 }

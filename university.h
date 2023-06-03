@@ -39,15 +39,13 @@ public:
   vector<Student *> getClassListByID();
   bool cmpLastName(const Student *s1, const Student *s2);
   bool cmpID(const Student *s1, const Student *s2);
-    // Return the title for the course
+  // Return the title for the course
   string getCourseTitle(const string &courseNumber);
 
 private:
   string universityName;
-  vector<University *> universties;
-  vector<Student *> students;
-  unordered_map<string, Course *> courses;
-  unordered_map<int, vector<string>> enrollmentInfo;
+  vector<Student *> uniStudents;
+  vector<Course *> Courses;
 };
 
 #endif

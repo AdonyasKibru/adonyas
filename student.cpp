@@ -19,7 +19,7 @@ Student::Student(const int &idNumber, const string &lastname,
 // Drop student from given course, return true if successful
 bool Student::dropCourse(int studentID, const string &courseNumber) {
   for (int i = 0; i < enrollmentInfo[studentID].size(); i++) {
-    if (enrollmentInfo[studentID][i] == courseNumber) {
+    if (enrollmentInfo[studentID][i]->courseID == courseNumber) {
       for (int j = i; j < enrollmentInfo[studentID].size() - 1; j++) {
         enrollmentInfo[studentID][j] = enrollmentInfo[studentID][j + 1];
       }
@@ -35,7 +35,7 @@ bool Student::addCourse(int studentID, const string &courseNumber) {
       ((studentID / 1000) == 0) || (courseNumber.length() != 6)) {
     return false;
   }
-  enrollmentInfo[studentID].push_back(courseNumber);
+  enrollmentInfo[studentID].push_back(new Course(courseNumber));
   return true;
 }
 
@@ -43,8 +43,8 @@ bool Student::addCourse(int studentID, const string &courseNumber) {
 bool Student::isInCourse(int studentID, const string &courseNumber) const {
   const auto &enrolledCourses = enrollmentInfo.find(studentID);
   if (enrolledCourses != enrollmentInfo.end()) {
-    for (const string &course : enrolledCourses->second) {
-      if (course == courseNumber) {
+    for (const auto &course : enrolledCourses->second) {
+      if (course->courseID == courseNumber) {
         return true;
       }
     }
