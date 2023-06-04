@@ -31,11 +31,14 @@ void test1() {
          "Data Structures, Algorithms, and Discrete Mathematics I");
   // // check enrollments
   assert(es.getEnrolledCourses(1070) == "[CSS110, CSS173, CSS342]");
-  // string c342byLastName =
-  //     "[Collins, Cassandra (1070), Evans, Juan (1401), Gonzalez, Holly
-  //     (1223), " "Henderson, Daniel (1364), Taylor, Alexander (1986),Thompson,
-  //     Christine "
-  //     "(1386), Watson, Alex (1211)]";
+  string c342byLastName =
+      "[Collins, Cassandra (1070), Evans, Juan (1401), Gonzalez, Holly (1223), "
+      "Henderson, Daniel (1364), Taylor, Alexander (1986),Thompson, Christine "
+      "(1386), Watson, Alex (1211)]";
+  stringstream outSS;
+  string skp = es.getClassListByLastName("CSS342");
+  outSS << skp;
+  cout << outSS.str();
   // assert(es.getClassListByLastName("CSS342") == c342byLastName);
   //  string c342byID =
   //      "[Collins, Cassandra (1070), Watson, Alex (1211), Gonzalez, Holly "

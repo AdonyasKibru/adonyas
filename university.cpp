@@ -45,6 +45,8 @@ bool University::readStudentList(const string &filename) {
     stringstream studentData(line);
     studentData >> stuID >> firstName >> lastName;
     uniStudents.push_back(new Student(stuID, lastName, firstName));
+    Course *answer = Courses[0];
+    answer->students.push_back(new Student(stuID, lastName, firstName));
   }
   loadFile.close();
   return true;
@@ -155,22 +157,31 @@ string University::getEnrolledCourses(int studentID) const {
   return ans;
 }
 
-// vector<Student *> University::getClassListByLastName() {
-//   // sort(students.begin(), students.end(), cmpLastName);
-//   return students;
-// }
-
-// vector<Student *> University::getClassListByID() {
-//   // sort(students.begin(), students.end(), cmpID);
-//   return students;
-// }
+// Return class list sorted by last name of students
+string University::getClassListByLastName(const string &courseNumber) {
+  string answer;
+  for (Course *val : Courses) {
+    answer = val->getClassListByLastName(courseNumber);
+  }
+  return answer;
+}
+// Return class list sorted by id of students
+string University::getClassListByID(const string &courseNumber) const {
+  return courseNumber;
+}
 
 bool University::cmpLastName(const Student *stu1, const Student *stu2) {
-  return (stu1->studentLastName > stu2->studentLastName);
+  bool answer;
+  Course *val = Courses[0];
+  answer = val->cmpLastName(stu1, stu2);
+  return answer;
 }
 
 bool University::cmpID(const Student *stu1, const Student *stu2) {
-  return (stu1->studentID > stu2->studentID);
+  bool answer;
+  Course *val = Courses[0];
+  answer = val->cmpID(stu1, stu2);
+  return answer;
 }
 
 // Return the title for the course

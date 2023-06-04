@@ -97,44 +97,26 @@ bool EnrollmentSystem::isInCourse(int studentID,
   return value;
 }
 
-// string
-// EnrollmentSystem::getClassListByLastName(const string &courseNumber) const {
-//   vector<Student *> classList =
-//   courses[courseNumber]->getClassListByLastName(); sort(classList.begin(),
-//   classList.end(), cmpLastName);
-//   // Format the class list into a string separated by commas
-//   string result;
-//   for (const auto student : classList) {
-//     result += student->getFullName() + ", ";
-//   }
-//   // Remove the trailing comma and space
-//   if (!result.empty()) {
-//     result = result.substr(0, result.length() - 2);
-//   }
-//   return result;
-// }
+string EnrollmentSystem::getClassListByLastName(const string &courseNumber) {
+  University *answer = universties[0];
+  string value = answer->getClassListByLastName(courseNumber);
+  return value;
+}
 
-// string EnrollmentSystem::getClassListByID(const string &courseNumber) const {
-//   vector<Student *> classList = stu;
-//   sort(classList.begin(), classList.end(), cmpID);
-//   // Format the class list into a string separated by commas
-//   string result;
-//   for (const auto student : classList) {
-//     result += student->studentLastName + ", ";
-//   }
-//   // Remove the trailing comma and space
-//   if (!result.empty()) {
-//     result = result.substr(0, result.length() - 2);
-//   }
-//   return result;
-// }
+string EnrollmentSystem::getClassListByID(const string &courseNumber) const {
+  return courseNumber;
+}
 
 bool EnrollmentSystem::cmpLastName(const Student *stu1, const Student *stu2) {
-  return (stu1->studentLastName < stu2->studentLastName);
+  University *answer = universties[0];
+  bool value = answer->cmpLastName(stu1,stu2);
+  return value;
 }
 
 bool EnrollmentSystem::cmpID(const Student *stu1, const Student *stu2) {
-  return (stu1->studentID < stu2->studentID);
+  University *answer = universties[0];
+  bool value = answer->cmpID(stu1,stu2);
+  return value;
 }
 
 // Return the title for the course

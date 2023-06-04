@@ -21,19 +21,19 @@ public:
   Course(const string &courseID, const string &courseName);
   void addStudent(Student *student);
   void removeStudent(Student *student);
-  // // Return class list sorted by last name of students
-  // string getClassListByLastName(const string &courseNumber) const;
-  // // Return class list sorted by id of students
-  // string getClassListByID(const string &courseNumber) const;
-  bool cmpLastName(const Student *stu1, const Student *stu2);
+  // Return class list sorted by last name of students
+  string getClassListByLastName(const string &courseNumber);
+  // Return class list sorted by id of students
+  string getClassListByID(const string &courseNumber) const;
+  static bool cmpLastName(const Student *stu1, const Student *stu2);
   bool cmpID(const Student *stu1, const Student *stu2);
 
 private:
   string courseID;
   string courseName;
 
-  // store the student ID and their names from the text
-  unordered_map<string, vector<Student *>> students;
+  // store the course ID and their names from the text
+  vector<Student *> students;
 };
 
 #endif

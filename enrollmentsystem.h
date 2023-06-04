@@ -41,11 +41,11 @@ public:
   bool addCourse(int studentID, const string &courseNumber);
   bool isInCourse(int studentID, const string &courseNumber) const;
 
-  //   // Return class list sorted by last name of students
-  // string getClassListByLastName(const string &courseNumber) const;
+    // Return class list sorted by last name of students
+  string getClassListByLastName(const string &courseNumber);
 
-  // // Return class list sorted by id of students
-  // string getClassListByID(const string &courseNumber) const;
+  // Return class list sorted by id of students
+  string getClassListByID(const string &courseNumber) const;
 
   bool cmpLastName(const Student *stu1, const Student *stu2);
   bool cmpID(const Student *stu1, const Student *stu2);
@@ -57,8 +57,6 @@ private:
   University *currentUniversity;
 
   vector<University *> universties;
-
-  // unordered_map<int, vector<string>> enrollmentInfo;
 };
 
 #endif

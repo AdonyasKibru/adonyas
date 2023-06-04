@@ -35,8 +35,12 @@ public:
   // The returned courses are separated by commas and sorted by course name
   string getEnrolledCourses(int studentID) const;
 
-  // vector<Student *> getClassListByLastName();
-  // vector<Student *> getClassListByID();
+// Return class list sorted by last name of students
+  string getClassListByLastName(const string &courseNumber);
+  // Return class list sorted by id of students
+  string getClassListByID(const string &courseNumber) const;
+
+  
   bool cmpLastName(const Student *stu1, const Student *stu2);
   bool cmpID(const Student *stu1, const Student *stu2);
   // Return the title for the course
