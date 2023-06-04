@@ -10,6 +10,8 @@ using namespace std;
 class EnrollmentSystem {
 
 public:
+  ~EnrollmentSystem();
+
   // Add university to the enrollments system
   bool addUniversity(const string &name);
 
@@ -45,8 +47,8 @@ public:
   // // Return class list sorted by id of students
   // string getClassListByID(const string &courseNumber) const;
 
-  bool cmpLastName(const Student *s1, const Student *s2);
-  bool cmpID(const Student *s1, const Student *s2);
+  bool cmpLastName(const Student *stu1, const Student *stu2);
+  bool cmpID(const Student *stu1, const Student *stu2);
   // Return the title for the course
   string getCourseTitle(const string &courseNumber);
 

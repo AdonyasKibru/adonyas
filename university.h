@@ -12,7 +12,7 @@ class University {
   friend class EnrollmentSystem;
 
 public:
-  University(const string &name);
+  explicit University(const string &name);
   virtual ~University();
 
   // Read the student list for current active university
@@ -35,10 +35,10 @@ public:
   // The returned courses are separated by commas and sorted by course name
   string getEnrolledCourses(int studentID) const;
 
-  vector<Student *> getClassListByLastName();
-  vector<Student *> getClassListByID();
-  bool cmpLastName(const Student *s1, const Student *s2);
-  bool cmpID(const Student *s1, const Student *s2);
+  // vector<Student *> getClassListByLastName();
+  // vector<Student *> getClassListByID();
+  bool cmpLastName(const Student *stu1, const Student *stu2);
+  bool cmpID(const Student *stu1, const Student *stu2);
   // Return the title for the course
   string getCourseTitle(const string &courseNumber);
 

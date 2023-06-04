@@ -18,15 +18,18 @@ Student::Student(const int &idNumber, const string &lastname,
 
 // Drop student from given course, return true if successful
 bool Student::dropCourse(int studentID, const string &courseNumber) {
-  for (int i = 0; i < enrollmentInfo[studentID].size(); i++) {
-    if (enrollmentInfo[studentID][i]->courseID == courseNumber) {
-      for (int j = i; j < enrollmentInfo[studentID].size() - 1; j++) {
-        enrollmentInfo[studentID][j] = enrollmentInfo[studentID][j + 1];
+  if (enrollmentInfo.find(studentID) != enrollmentInfo.end()) {
+    vector<Course *> &courses = enrollmentInfo[studentID];
+
+    for (auto it = courses.begin(); it != courses.end(); ++it) {
+      if ((*it)->courseID == courseNumber) {
+        delete *it;
+        courses.erase(it);
+        return true;
       }
-      enrollmentInfo[studentID].pop_back();
-      return true;
     }
   }
+
   return false;
 }
 

@@ -11,6 +11,12 @@
 
 using namespace std;
 
+EnrollmentSystem::~EnrollmentSystem() {
+  for (University *university : universties) {
+    delete university;
+  }
+}
+
 // Add university to the enrollments system
 bool EnrollmentSystem::addUniversity(const string &name) {
   for (University *val : universties) {
@@ -123,12 +129,12 @@ bool EnrollmentSystem::isInCourse(int studentID,
 //   return result;
 // }
 
-bool EnrollmentSystem::cmpLastName(const Student *s1, const Student *s2) {
-  return (s1->studentLastName < s2->studentLastName);
+bool EnrollmentSystem::cmpLastName(const Student *stu1, const Student *stu2) {
+  return (stu1->studentLastName < stu2->studentLastName);
 }
 
-bool EnrollmentSystem::cmpID(const Student *s1, const Student *s2) {
-  return (s1->studentID < s2->studentID);
+bool EnrollmentSystem::cmpID(const Student *stu1, const Student *stu2) {
+  return (stu1->studentID < stu2->studentID);
 }
 
 // Return the title for the course

@@ -12,6 +12,11 @@ University::University(const string &name) : universityName(name) {}
 
 University::~University() {
   for (Student *student : uniStudents) {
+    for (auto &enrollment : student->enrollmentInfo) {
+      for (Course *course : enrollment.second) {
+        delete course;
+      }
+    }
     delete student;
   }
 
@@ -33,14 +38,13 @@ bool University::readStudentList(const string &filename) {
 
   string line;
   while (getline(loadFile, line)) {
-    int id;
+    int stuID;
     string firstName;
     string lastName;
 
     stringstream studentData(line);
-    studentData >> id >> firstName >> lastName;
-
-    uniStudents.push_back(new Student(id, lastName, firstName));
+    studentData >> stuID >> firstName >> lastName;
+    uniStudents.push_back(new Student(stuID, lastName, firstName));
   }
   loadFile.close();
   return true;
@@ -58,22 +62,24 @@ bool University::readCourseList(const string &filename) {
   }
 
   string line;
+
   while (getline(loadFile, line)) {
     string shortName;
     string longName = "";
 
-    stringstream ss(line);
-    ss >> shortName;
+    stringstream ssLine(line);
+    ssLine >> shortName;
     string val;
-    ss >> val;
+    ssLine >> val;
     longName += val;
-    while (ss >> val) {
+
+    while (ssLine >> val) {
       longName += " ";
       longName += val;
     }
-
     Courses.push_back(new Course(shortName, longName));
   }
+
   loadFile.close();
   return true;
 }
@@ -159,12 +165,12 @@ string University::getEnrolledCourses(int studentID) const {
 //   return students;
 // }
 
-bool University::cmpLastName(const Student *s1, const Student *s2) {
-  return (s1->studentLastName > s2->studentLastName);
+bool University::cmpLastName(const Student *stu1, const Student *stu2) {
+  return (stu1->studentLastName > stu2->studentLastName);
 }
 
-bool University::cmpID(const Student *s1, const Student *s2) {
-  return (s1->studentID > s2->studentID);
+bool University::cmpID(const Student *stu1, const Student *stu2) {
+  return (stu1->studentID > stu2->studentID);
 }
 
 // Return the title for the course

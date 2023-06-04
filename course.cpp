@@ -6,17 +6,10 @@
 
 using namespace std;
 
-ostream &operator<<(ostream &out, const Course &course) {
-  out << course.courseID << " " << course.courseName;
-  return out;
-}
-
 Course::Course(const string &courseID) : courseID(courseID) {}
 
 Course::Course(const string &courseID, const string &courseName)
     : courseID(courseID), courseName(courseName) {}
-
-Course::~Course() {}
 
 void Course::addStudent(Student *student) {
   students[courseID].push_back(student);
@@ -43,10 +36,10 @@ void Course::removeStudent(Student *student) {
 // // Return class list sorted by id of students
 // string getClassListByID(const string &courseNumber) const {}
 
-bool Course::cmpLastName(const Student *s1, const Student *s2) {
-  return (s1->studentLastName > s2->studentLastName);
+bool Course::cmpLastName(const Student *stu1, const Student *stu2) {
+  return (stu1->studentLastName > stu2->studentLastName);
 }
 
-bool Course::cmpID(const Student *s1, const Student *s2) {
-  return (s1->studentID < s2->studentID);
+bool Course::cmpID(const Student *stu1, const Student *stu2) {
+  return (stu1->studentID < stu2->studentID);
 }
