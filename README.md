@@ -11,6 +11,8 @@ The memory leak occurs when dynamically allocating memory for Course objects usi
 new keyword and storing them in the enrollmentInfo container. Although their is a destructor in University class
 and deleting the pointer result in double free error leaving it cause leaked memory. 
 
+It is also important to know that the test doess not cover all possible cases so thier are misses.
+
 There are also some clang tidy warnings that can not be solved because of the structure of the functions
 and the requirments 
 
