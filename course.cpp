@@ -23,46 +23,59 @@ void Course::removeStudent(Student *student) {
 }
 
 string Course::getClassListByLastName(const string &courseNumber) {
-  string ans = "1";
-  vector<Student *> value;
+  string ans = "[";
 
-  // for (Student *stu : students) {
-  //   if (stu->isInCourse(stu->studentID, courseNumber)) {
-  //     value.push_back(stu);
-  //     ans = "here";
-  //   }
-  // }
+  sort(students[courseNumber].begin(), students[courseNumber].end(),
+       cmpLastName);
+  ans += students[courseNumber][0]->studentLastName;
+  ans += ", ";
+  ans += students[courseNumber][0]->studentfirstName;
+  ans += " (";
+  ans += to_string(students[courseNumber][0]->studentID);
+  ans += ")";
 
-  sort(value.begin(), value.end(), cmpLastName);
-  // ans = students[courseNumber][0]->studentLastName;
-  //  ans += ", ";
-  //  ans += students[courseNumber][0]->studentfirstName;
-  //  ans += " (";
-  //  ans += students[courseNumber][0]->studentID;
-  //  ans += ")";
-
-  // for (int i = 1; i < students[courseNumber].size(); i++) {
-  //   ans += ", ";
-  //   ans += students[courseNumber][i]->studentLastName;
-  //   ans += ", ";
-  //   ans += students[courseNumber][i]->studentfirstName;
-  //   ans += " (";
-  //   ans += students[courseNumber][i]->studentID;
-  //   ans += ")";
-  // }
-  // ans += "]";
+  for (int i = 1; i < students[courseNumber].size(); i++) {
+    ans += ", ";
+    ans += students[courseNumber][i]->studentLastName;
+    ans += ", ";
+    ans += students[courseNumber][i]->studentfirstName;
+    ans += " (";
+    ans += to_string(students[courseNumber][i]->studentID);
+    ans += ")";
+  }
+  ans += "]";
   return ans;
 }
 
 // Return class list sorted by id of students
-string Course::getClassListByID(const string &courseNumber) const {
-  return courseNumber;
+string Course::getClassListByID(const string &courseNumber) {
+  string ans = "[";
+
+  sort(students[courseNumber].begin(), students[courseNumber].end(), cmpID);
+  ans += students[courseNumber][0]->studentLastName;
+  ans += ", ";
+  ans += students[courseNumber][0]->studentfirstName;
+  ans += " (";
+  ans += to_string(students[courseNumber][0]->studentID);
+  ans += ")";
+
+  for (int i = 1; i < students[courseNumber].size(); i++) {
+    ans += ", ";
+    ans += students[courseNumber][i]->studentLastName;
+    ans += ", ";
+    ans += students[courseNumber][i]->studentfirstName;
+    ans += " (";
+    ans += to_string(students[courseNumber][i]->studentID);
+    ans += ")";
+  }
+  ans += "]";
+  return ans;
 }
 
 bool Course::cmpLastName(const Student *stu1, const Student *stu2) {
-  return stu1->studentLastName > stu2->studentLastName;
+  return stu1->studentLastName < stu2->studentLastName;
 }
 
 bool Course::cmpID(const Student *stu1, const Student *stu2) {
-  return (stu1->studentID < stu2->studentID);
+  return stu1->studentID < stu2->studentID;
 }

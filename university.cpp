@@ -8,8 +8,10 @@
 
 using namespace std;
 
+/*constructor*/
 University::University(const string &name) : universityName(name) {}
 
+/*Destructor*/
 University::~University() {
   for (const auto &pair : uniStudents) {
     for (auto &enrollment : pair.second->enrollmentInfo) {
@@ -25,8 +27,8 @@ University::~University() {
   }
 }
 
-// Read the student list for current active university
-// return true if file successfully read
+/* Read the student list for current active university
+ return true if file successfully read*/
 bool University::readStudentList(const string &filename) {
   ifstream loadFile;
   loadFile.open(filename);
@@ -52,8 +54,8 @@ bool University::readStudentList(const string &filename) {
   return true;
 }
 
-// Read the course list for current active university
-// return true if file successfully read
+/* Read the course list for current active university
+ return true if file successfully read*/
 bool University::readCourseList(const string &filename) {
   ifstream loadFile;
   loadFile.open(filename);
@@ -86,8 +88,8 @@ bool University::readCourseList(const string &filename) {
   return true;
 }
 
-// Read the student enrollment information for current active university
-// return true if file successfully read
+/* Read the student enrollment information for current active university
+ return true if file successfully read*/
 bool University::readEnrollmentInfo(const string &filename) {
   ifstream loadFile;
   loadFile.open(filename);
@@ -102,8 +104,8 @@ bool University::readEnrollmentInfo(const string &filename) {
     int stuID;
     string shortName;
 
-    stringstream ss(line);
-    ss >> stuID >> shortName;
+    stringstream ssLine(line);
+    ssLine >> stuID >> shortName;
 
     for (const auto &pair : uniStudents) {
       if (pair.second->addCourse(stuID, shortName)) {
@@ -120,15 +122,28 @@ bool University::readEnrollmentInfo(const string &filename) {
   return true;
 }
 
-// Drop student from given course, return true if successful
+/* Drop student from given course, return true if successful*/
 bool University::dropCourse(int studentID, const string &courseNumber) {
-  // for (Student *student : uniStudents) {
-  //   if (student->dropCourse(studentID, courseNumber))
-  //     return true;
-  // }
-  return true;
+  bool ans = false;
+  for (const auto &pair : uniStudents) {
+    for (int i = 0; i < pair.second->enrollmentInfo[studentID].size(); i++) {
+      if (pair.second->enrollmentInfo[studentID][i]->courseID == courseNumber) {
+        for (int j = i; j < pair.second->enrollmentInfo[studentID].size() - 1;
+             j++) {
+          pair.second->enrollmentInfo[studentID][j] =
+              pair.second->enrollmentInfo[studentID][j + 1];
+        }
+        pair.second->enrollmentInfo[studentID].pop_back();
+        ans = true;
+        break;
+      }
+    }
+  }
+
+  return ans;
 }
 
+/*This is used to add a student to a course*/
 bool University::addCourse(int studentID, const string &courseNumber) {
   bool ans = false;
   for (const auto &pair : uniStudents) {
@@ -144,7 +159,7 @@ bool University::addCourse(int studentID, const string &courseNumber) {
   return ans;
 }
 
-// Return true if student is in the given course
+/* Return true if student is in the given course*/
 bool University::isInCourse(int studentID, const string &courseNumber) const {
   for (const auto &pair : uniStudents) {
     if (pair.second->studentID == studentID) {
@@ -154,8 +169,8 @@ bool University::isInCourse(int studentID, const string &courseNumber) const {
   return false;
 }
 
-// Return the courses student is enrolled in
-// The returned courses are separated by commas and sorted by course name
+/* Return the courses student is enrolled in
+The returned courses are separated by commas and sorted by course name*/
 string University::getEnrolledCourses(int studentID) const {
   string ans = "[";
   Student *value;
@@ -171,7 +186,7 @@ string University::getEnrolledCourses(int studentID) const {
   return ans;
 }
 
-// Return class list sorted by last name of students
+/*Return class list sorted by last name of students*/
 string University::getClassListByLastName(const string &courseNumber) {
   string answer;
   for (Course *val : Courses) {
@@ -179,11 +194,16 @@ string University::getClassListByLastName(const string &courseNumber) {
   }
   return answer;
 }
-// Return class list sorted by id of students
-string University::getClassListByID(const string &courseNumber) const {
-  return courseNumber;
+/*Return class list sorted by id of students*/
+string University::getClassListByID(const string &courseNumber) {
+  string answer;
+  for (Course *val : Courses) {
+    answer = val->getClassListByID(courseNumber);
+  }
+  return answer;
 }
 
+/*is a function used to create a comparator for students by lastName*/
 bool University::cmpLastName(const Student *stu1, const Student *stu2) {
   bool answer;
   Course *val = Courses[0];
@@ -191,6 +211,7 @@ bool University::cmpLastName(const Student *stu1, const Student *stu2) {
   return answer;
 }
 
+/*is a function used to create a comparator for students by ID*/
 bool University::cmpID(const Student *stu1, const Student *stu2) {
   bool answer;
   Course *val = Courses[0];
@@ -198,7 +219,7 @@ bool University::cmpID(const Student *stu1, const Student *stu2) {
   return answer;
 }
 
-// Return the title for the course
+/*Return the title for the course*/
 string University::getCourseTitle(const string &courseNumber) {
   string answer;
   for (Course *val : Courses) {

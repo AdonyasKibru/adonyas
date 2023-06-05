@@ -24,9 +24,9 @@ public:
   // Return class list sorted by last name of students
   string getClassListByLastName(const string &courseNumber);
   // Return class list sorted by id of students
-  string getClassListByID(const string &courseNumber) const;
+  string getClassListByID(const string &courseNumber);
   static bool cmpLastName(const Student *stu1, const Student *stu2);
-  bool cmpID(const Student *stu1, const Student *stu2);
+  static bool cmpID(const Student *stu1, const Student *stu2);
 
 private:
   string courseID;

@@ -1,44 +1,46 @@
 #include "student.h"
 #include "course.h"
-
+#include <iostream>
+#include <memory>
 #include <sstream>
 
 using namespace std;
 
+// this function is used to print student
 ostream &operator<<(ostream &out, const Student &student) {
   out << student.studentLastName << ", " << student.studentfirstName << " ("
       << student.studentID << ")";
   return out;
 }
 
+// constructor
 Student::Student(const int &idNumber, const string &lastname,
                  const string &firstname)
     : studentLastName(lastname), studentfirstName(firstname),
       studentID(idNumber) {}
-
-// Drop student from given course, return true if successful
+// this function is used to remove a student from a course
 bool Student::dropCourse(int studentID, const string &courseNumber) {
-  if (enrollmentInfo.find(studentID) != enrollmentInfo.end()) {
-    vector<Course *> &courses = enrollmentInfo[studentID];
-
-    for (auto it = courses.begin(); it != courses.end(); ++it) {
-      if ((*it)->courseID == courseNumber) {
-        delete *it;
-        courses.erase(it);
-        return true;
-      }
+  bool ans = false;
+  vector<Course *> &courses = enrollmentInfo[studentID];
+  for (int i = 0; i < courses.size(); i++) {
+    if (courses[i]->courseID == courseNumber) {
+      delete courses[i]; // Deallocate memory for the Course object
+      courses.erase(courses.begin() + i);
+      ans = true;
+      break;
     }
   }
-
-  return false;
+  return ans;
 }
-
+// this function is used to add a student to a course
 bool Student::addCourse(int studentID, const string &courseNumber) {
   if (Student::isInCourse(studentID, courseNumber) ||
       ((studentID / 1000) == 0) || (courseNumber.length() != 6)) {
     return false;
   }
+
   enrollmentInfo[studentID].push_back(new Course(courseNumber));
+
   return true;
 }
 
