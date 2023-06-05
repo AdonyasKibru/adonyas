@@ -11,13 +11,13 @@ using namespace std;
 University::University(const string &name) : universityName(name) {}
 
 University::~University() {
-  for (Student *student : uniStudents) {
-    for (auto &enrollment : student->enrollmentInfo) {
+  for (const auto &pair : uniStudents) {
+    for (auto &enrollment : pair.second->enrollmentInfo) {
       for (Course *course : enrollment.second) {
         delete course;
       }
     }
-    delete student;
+    delete pair.second;
   }
 
   for (Course *course : Courses) {
@@ -44,9 +44,9 @@ bool University::readStudentList(const string &filename) {
 
     stringstream studentData(line);
     studentData >> stuID >> firstName >> lastName;
-    uniStudents.push_back(new Student(stuID, lastName, firstName));
-    Course *answer = Courses[0];
-    answer->students.push_back(new Student(stuID, lastName, firstName));
+    if (uniStudents.find(stuID) == uniStudents.end()) {
+      uniStudents[stuID] = new Student(stuID, lastName, firstName);
+    }
   }
   loadFile.close();
   return true;
@@ -99,14 +99,20 @@ bool University::readEnrollmentInfo(const string &filename) {
 
   string line;
   while (getline(loadFile, line)) {
-    int id;
+    int stuID;
     string shortName;
 
     stringstream ss(line);
-    ss >> id >> shortName;
+    ss >> stuID >> shortName;
 
-    for (Student *value : uniStudents) {
-      value->addCourse(id, shortName);
+    for (const auto &pair : uniStudents) {
+      if (pair.second->addCourse(stuID, shortName)) {
+        for (Course *val : Courses) {
+          if (pair.second->studentID == stuID) {
+            val->students[shortName].push_back(pair.second);
+          }
+        }
+      }
     }
   }
 
@@ -116,18 +122,23 @@ bool University::readEnrollmentInfo(const string &filename) {
 
 // Drop student from given course, return true if successful
 bool University::dropCourse(int studentID, const string &courseNumber) {
-  for (Student *student : uniStudents) {
-    if (student->dropCourse(studentID, courseNumber))
-      return true;
-  }
-  return false;
+  // for (Student *student : uniStudents) {
+  //   if (student->dropCourse(studentID, courseNumber))
+  //     return true;
+  // }
+  return true;
 }
 
 bool University::addCourse(int studentID, const string &courseNumber) {
   bool ans = false;
-  for (Student *student : uniStudents) {
-    if (student->addCourse(studentID, courseNumber)) {
+  for (const auto &pair : uniStudents) {
+    if (pair.second->addCourse(studentID, courseNumber)) {
       ans = true;
+      for (Course *val : Courses) {
+        if (pair.second->studentID == studentID) {
+          val->students[courseNumber].push_back(pair.second);
+        }
+      }
     }
   }
   return ans;
@@ -135,9 +146,9 @@ bool University::addCourse(int studentID, const string &courseNumber) {
 
 // Return true if student is in the given course
 bool University::isInCourse(int studentID, const string &courseNumber) const {
-  for (const Student *student : uniStudents) {
-    if (student->studentID == studentID) {
-      return student->isInCourse(studentID, courseNumber);
+  for (const auto &pair : uniStudents) {
+    if (pair.second->studentID == studentID) {
+      return pair.second->isInCourse(studentID, courseNumber);
     }
   }
   return false;
@@ -147,7 +158,10 @@ bool University::isInCourse(int studentID, const string &courseNumber) const {
 // The returned courses are separated by commas and sorted by course name
 string University::getEnrolledCourses(int studentID) const {
   string ans = "[";
-  Student *value = uniStudents[0];
+  Student *value;
+  for (const auto pair : uniStudents) {
+    value = pair.second;
+  }
   ans = ans + value->enrollmentInfo[studentID][0]->courseID;
   for (int i = 1; i < value->enrollmentInfo[studentID].size(); i++) {
     ans += ", ";

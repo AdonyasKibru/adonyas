@@ -33,7 +33,7 @@ private:
   string courseName;
 
   // store the course ID and their names from the text
-  vector<Student *> students;
+  unordered_map<string, vector<Student *>> students;
 };
 
 #endif

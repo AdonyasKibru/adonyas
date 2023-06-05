@@ -1,28 +1,39 @@
-Sun Jun  4 05:26:35 UTC 2023
+Mon Jun  5 02:00:57 UTC 2023
 Linux LinuxMachine 5.10.16.3-microsoft-standard-WSL2 #1 SMP Fri Apr 2 22:23:49 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
 uid=1000(cssuwbstudent) gid=1000(cssuwbstudent) groups=1000(cssuwbstudent),10(wheel)
 =====================================================
 1. Compilation warnings are in the section below
 =====================================================
+course.cpp: In member function ‘std::__cxx11::string Course::getClassListByLastName(const string&)’:
+course.cpp:25:53: warning: unused parameter ‘courseNumber’ [-Wunused-parameter]
+ string Course::getClassListByLastName(const string &courseNumber) {
+                                       ~~~~~~~~~~~~~~^~~~~~~~~~~~
+university.cpp: In member function ‘bool University::dropCourse(int, const string&)’:
+university.cpp:124:33: warning: unused parameter ‘studentID’ [-Wunused-parameter]
+ bool University::dropCourse(int studentID, const string &courseNumber) {
+                             ~~~~^~~~~~~~~
+university.cpp:124:58: warning: unused parameter ‘courseNumber’ [-Wunused-parameter]
+ bool University::dropCourse(int studentID, const string &courseNumber) {
+                                            ~~~~~~~~~~~~~~^~~~~~~~~~~~
 =====================================================
 2. Program output are in the section below
 =====================================================
-Done.
+1Done.
 =====================================================
 3. clang-tidy warnings are in the section below
 =====================================================
-19537 warnings generated.
-40307 warnings generated.
-58684 warnings generated.
-75823 warnings generated.
-95390 warnings generated.
-/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/course.cpp:11:16: error: 2 adjacent parameters of 'Course' of similar type ('const std::string &') are easily swapped by mistake [bugprone-easily-swappable-parameters,-warnings-as-errors]
+19549 warnings generated.
+40319 warnings generated.
+58703 warnings generated.
+75842 warnings generated.
+95419 warnings generated.
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/course.cpp:12:16: error: 2 adjacent parameters of 'Course' of similar type ('const std::string &') are easily swapped by mistake [bugprone-easily-swappable-parameters,-warnings-as-errors]
 Course::Course(const string &courseID, const string &courseName)
                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/course.cpp:11:30: note: the first parameter in the range is 'courseID'
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/course.cpp:12:30: note: the first parameter in the range is 'courseID'
 Course::Course(const string &courseID, const string &courseName)
                              ^~~~~~~~
-/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/course.cpp:11:54: note: the last parameter in the range is 'courseName'
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/course.cpp:12:54: note: the last parameter in the range is 'courseName'
 Course::Course(const string &courseID, const string &courseName)
                                                      ^~~~~~~~~~
 /home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:33:3: error: replace loop by 'std::any_of()' [readability-use-anyofallof,-warnings-as-errors]
@@ -40,29 +51,38 @@ Student::Student(const int &idNumber, const string &lastname,
 /home/cssuwbstudent/2023win342d-p5-AdonyasKibru/student.cpp:15:32: note: the last parameter in the range is 'firstname'
                  const string &firstname)
                                ^~~~~~~~~
-/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/university.cpp:68:12: error: redundant string initialization [readability-redundant-string-init,-warnings-as-errors]
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/university.cpp:70:12: error: redundant string initialization [readability-redundant-string-init,-warnings-as-errors]
     string longName = "";
            ^~~~~~~~~~~~~
            longName
-/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/university.cpp:100:9: error: variable name 'id' is too short, expected at least 3 characters [readability-identifier-length,-warnings-as-errors]
-    int id;
-        ^
-/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/university.cpp:103:18: error: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length,-warnings-as-errors]
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/university.cpp:105:18: error: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length,-warnings-as-errors]
     stringstream ss(line);
                  ^
-/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/university.cpp:118:54: error: statement should be inside braces [google-readability-braces-around-statements,readability-braces-around-statements,-warnings-as-errors]
-    if (student->dropCourse(studentID, courseNumber))
-                                                     ^
-                                                      {
-Suppressed 95381 warnings (95381 in non-user code).
+/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/university.cpp:190:12: error: static member accessed through instance [readability-static-accessed-through-instance,-warnings-as-errors]
+  answer = val->cmpLastName(stu1, stu2);
+           ^~~~~
+           Course::
+Suppressed 95412 warnings (95412 in non-user code).
 Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
-8 warnings treated as errors
+7 warnings treated as errors
 =====================================================
 4. clang-format warnings are in the section below
 =====================================================
 Running clang-format on ./course.cpp
 Running clang-format on ./enrollmentsystem.cpp
+112c112
+<   bool value = answer->cmpLastName(stu1,stu2);
+---
+>   bool value = answer->cmpLastName(stu1, stu2);
+118c118
+<   bool value = answer->cmpID(stu1,stu2);
+---
+>   bool value = answer->cmpID(stu1, stu2);
 Running clang-format on ./main.cpp
+33c33
+<   //assert(es.getEnrolledCourses(1070) == "[CSS110, CSS173, CSS342]");
+---
+>   // assert(es.getEnrolledCourses(1070) == "[CSS110, CSS173, CSS342]");
 Running clang-format on ./student.cpp
 Running clang-format on ./university.cpp
 =====================================================
@@ -71,21 +91,21 @@ Running clang-format on ./university.cpp
 =====================================================
 6. valgrind memory test is in the section below. Look for "definitely lost" 
 =====================================================
-==7314== Memcheck, a memory error detector
-==7314== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
-==7314== Using Valgrind-3.19.0 and LibVEX; rerun with -h for copyright info
-==7314== Command: ./a.out
-==7314== Parent PID: 7035
-==7314== 
-==7314== 
-==7314== HEAP SUMMARY:
-==7314==     in use at exit: 0 bytes in 0 blocks
-==7314==   total heap usage: 152,616 allocs, 152,616 frees, 10,634,422 bytes allocated
-==7314== 
-==7314== All heap blocks were freed -- no leaks are possible
-==7314== 
-==7314== For lists of detected and suppressed errors, rerun with: -s
-==7314== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==22746== Memcheck, a memory error detector
+==22746== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==22746== Using Valgrind-3.19.0 and LibVEX; rerun with -h for copyright info
+==22746== Command: ./a.out
+==22746== Parent PID: 22464
+==22746== 
+==22746== 
+==22746== HEAP SUMMARY:
+==22746==     in use at exit: 0 bytes in 0 blocks
+==22746==   total heap usage: 166,744 allocs, 166,744 frees, 10,887,115 bytes allocated
+==22746== 
+==22746== All heap blocks were freed -- no leaks are possible
+==22746== 
+==22746== For lists of detected and suppressed errors, rerun with: -s
+==22746== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 =====================================================
 7. Code coverage information is in the section below
 =====================================================
@@ -94,12 +114,14 @@ Name                                                                            
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Course::Course(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                                 1       0 100.00%         1       0 100.00%         0       0   0.00%
 Course::Course(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)         1       0 100.00%         1       0 100.00%         0       0   0.00%
-Course::addStudent(Student*)                                                                                                                                                                           1       1   0.00%         3       3   0.00%         0       0   0.00%
-Course::removeStudent(Student*)                                                                                                                                                                        9       9   0.00%        11      11   0.00%         6       6   0.00%
+Course::addStudent(Student*)                                                                                                                                                                           1       1   0.00%         4       4   0.00%         0       0   0.00%
+Course::removeStudent(Student*)                                                                                                                                                                        1       1   0.00%         4       4   0.00%         0       0   0.00%
+Course::getClassListByLastName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                 1       0 100.00%         6       0 100.00%         0       0   0.00%
+Course::getClassListByID(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const                                                                                 1       1   0.00%         3       3   0.00%         0       0   0.00%
 Course::cmpLastName(Student const*, Student const*)                                                                                                                                                    1       1   0.00%         3       3   0.00%         0       0   0.00%
 Course::cmpID(Student const*, Student const*)                                                                                                                                                          1       1   0.00%         3       3   0.00%         0       0   0.00%
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-TOTAL                                                                                                                                                                                                 14      12  14.29%        22      20   9.09%         6       6   0.00%
+TOTAL                                                                                                                                                                                                  8       5  37.50%        25      17  32.00%         0       0   0.00%
 
 File '/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp':
 Name                                                                                                                                                                                             Regions    Miss   Cover     Lines    Miss   Cover  Branches    Miss   Cover
@@ -108,101 +130,128 @@ EnrollmentSystem::~EnrollmentSystem()                                           
 EnrollmentSystem::addUniversity(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                5       0 100.00%         9       0 100.00%         4       0 100.00%
 EnrollmentSystem::setCurrentUniversity(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                         5       0 100.00%         9       0 100.00%         4       0 100.00%
 EnrollmentSystem::getUniversityName[abi:cxx11]() const                                                                                                                                                 1       0 100.00%         3       0 100.00%         0       0   0.00%
-EnrollmentSystem::getEnrolledCourses[abi:cxx11](int)                                                                                                                                                   1       0 100.00%         5       0 100.00%         0       0   0.00%
+EnrollmentSystem::getEnrolledCourses[abi:cxx11](int)                                                                                                                                                   1       1   0.00%         5       5   0.00%         0       0   0.00%
 EnrollmentSystem::readStudentList(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                              1       0 100.00%         5       0 100.00%         0       0   0.00%
 EnrollmentSystem::readCourseList(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                               1       0 100.00%         5       0 100.00%         0       0   0.00%
 EnrollmentSystem::readEnrollmentInfo(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                           1       0 100.00%         5       0 100.00%         0       0   0.00%
 EnrollmentSystem::dropCourse(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                              1       0 100.00%         5       0 100.00%         0       0   0.00%
 EnrollmentSystem::addCourse(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                               1       0 100.00%         5       0 100.00%         0       0   0.00%
 EnrollmentSystem::isInCourse(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const                                                                        1       0 100.00%         5       0 100.00%         0       0   0.00%
-EnrollmentSystem::cmpLastName(Student const*, Student const*)                                                                                                                                          1       1   0.00%         3       3   0.00%         0       0   0.00%
-EnrollmentSystem::cmpID(Student const*, Student const*)                                                                                                                                                1       1   0.00%         3       3   0.00%         0       0   0.00%
+EnrollmentSystem::getClassListByLastName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                       1       0 100.00%         5       0 100.00%         0       0   0.00%
+EnrollmentSystem::getClassListByID(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const                                                                       1       1   0.00%         3       3   0.00%         0       0   0.00%
+EnrollmentSystem::cmpLastName(Student const*, Student const*)                                                                                                                                          1       1   0.00%         5       5   0.00%         0       0   0.00%
+EnrollmentSystem::cmpID(Student const*, Student const*)                                                                                                                                                1       1   0.00%         5       5   0.00%         0       0   0.00%
 EnrollmentSystem::getCourseTitle(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                               1       0 100.00%         5       0 100.00%         0       0   0.00%
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-TOTAL                                                                                                                                                                                                 23       2  91.30%        72       6  91.67%        10       0 100.00%
+TOTAL                                                                                                                                                                                                 25       4  84.00%        84      18  78.57%        10       0 100.00%
 
 File '/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/main.cpp':
 Name                                                                                                                                                                                             Regions    Miss   Cover     Lines    Miss   Cover  Branches    Miss   Cover
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-test1()                                                                                                                                                                                                1       0 100.00%        21      16  23.81%         0       0   0.00%
+test1()                                                                                                                                                                                                1       0 100.00%        28      16  42.86%         0       0   0.00%
 main                                                                                                                                                                                                   1       0 100.00%         4       0 100.00%         0       0   0.00%
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-TOTAL                                                                                                                                                                                                  2       0 100.00%        25      16  36.00%         0       0   0.00%
+TOTAL                                                                                                                                                                                                  2       0 100.00%        32      16  50.00%         0       0   0.00%
 
 File '/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/student.cpp':
 Name                                                                                                                                                                                                           Regions    Miss   Cover     Lines    Miss   Cover  Branches    Miss   Cover
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 operator<<(std::ostream&, Student const&)                                                                                                                                                                            1       1   0.00%         5       5   0.00%         0       0   0.00%
 Student::Student(int const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)         1       0 100.00%         1       0 100.00%         0       0   0.00%
-Student::dropCourse(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                                     9       1  88.89%        13       1  92.31%         6       2  66.67%
+Student::dropCourse(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                                     9       9   0.00%        13      13   0.00%         6       6   0.00%
 Student::addCourse(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                                      8       0 100.00%         8       0 100.00%         6       0 100.00%
 Student::isInCourse(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const                                                                                               7       0 100.00%        11       0 100.00%         6       0 100.00%
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-TOTAL                                                                                                                                                                                                               26       2  92.31%        38       6  84.21%        18       2  88.89%
+TOTAL                                                                                                                                                                                                               26      10  61.54%        38      18  52.63%        18       6  66.67%
 
 File '/home/cssuwbstudent/2023win342d-p5-AdonyasKibru/university.cpp':
 Name                                                                                                                                                                                                           Regions    Miss   Cover     Lines    Miss   Cover  Branches    Miss   Cover
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 University::University(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                                       1       0 100.00%         1       0 100.00%         0       0   0.00%
 University::~University()                                                                                                                                                                                            5       0 100.00%        13       0 100.00%         8       0 100.00%
-University::readStudentList(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                                  6       1  83.33%        19       3  84.21%         4       1  75.00%
+University::readStudentList(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                                  8       1  87.50%        21       3  85.71%         6       1  83.33%
 University::readCourseList(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                                   8       1  87.50%        25       3  88.00%         6       1  83.33%
-University::readEnrollmentInfo(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                               7       1  85.71%        20       3  85.00%         6       1  83.33%
-University::dropCourse(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                                  5       1  80.00%         7       1  85.71%         4       2  50.00%
-University::addCourse(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                                   4       0 100.00%         9       0 100.00%         4       0 100.00%
+University::readEnrollmentInfo(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                              12       1  91.67%        26       3  88.46%        12       1  91.67%
+University::dropCourse(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                                  1       0 100.00%         3       0 100.00%         0       0   0.00%
+University::addCourse(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                                   7       0 100.00%        14       0 100.00%         8       0 100.00%
 University::isInCourse(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const                                                                                            5       1  80.00%         8       1  87.50%         4       1  75.00%
-University::getEnrolledCourses[abi:cxx11](int) const                                                                                                                                                                 4       0 100.00%        11       0 100.00%         2       0 100.00%
-University::cmpLastName(Student const*, Student const*)                                                                                                                                                              1       1   0.00%         3       3   0.00%         0       0   0.00%
-University::cmpID(Student const*, Student const*)                                                                                                                                                                    1       1   0.00%         3       3   0.00%         0       0   0.00%
+University::getEnrolledCourses[abi:cxx11](int) const                                                                                                                                                                 5       5   0.00%        14      14   0.00%         4       4   0.00%
+University::getClassListByLastName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                           2       0 100.00%         7       0 100.00%         2       0 100.00%
+University::getClassListByID(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const                                                                                           1       1   0.00%         3       3   0.00%         0       0   0.00%
+University::cmpLastName(Student const*, Student const*)                                                                                                                                                              1       1   0.00%         6       6   0.00%         0       0   0.00%
+University::cmpID(Student const*, Student const*)                                                                                                                                                                    1       1   0.00%         6       6   0.00%         0       0   0.00%
 University::getCourseTitle(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)                                                                                                   4       0 100.00%         9       0 100.00%         4       0 100.00%
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-TOTAL                                                                                                                                                                                                               51       7  86.27%       128      17  86.72%        42       6  85.71%
+TOTAL                                                                                                                                                                                                               61      12  80.33%       156      39  75.00%        54       8  85.19%
 /home/cssuwbstudent/2023win342d-p5-AdonyasKibru/course.cpp:
     1|       |#include "course.h"
     2|       |#include "student.h"
     3|       |#include <algorithm>
     4|       |#include <cassert>
-    5|       |#include <sstream>
-    6|       |
-    7|       |using namespace std;
-    8|       |
-    9|  66.9k|Course::Course(const string &courseID) : courseID(courseID) {}
-   10|       |
-   11|       |Course::Course(const string &courseID, const string &courseName)
-   12|     79|    : courseID(courseID), courseName(courseName) {}
-   13|       |
-   14|      0|void Course::addStudent(Student *student) {
-   15|      0|  students[courseID].push_back(student);
-   16|      0|}
-   17|       |
-   18|      0|void Course::removeStudent(Student *student) {
-   19|      0|  for (int i = 0; i < students[courseID].size(); i++) {
-   20|      0|    if (students[courseID][i] == student) {
-   21|      0|      for (int j = i; j < students[courseID].size() - 1; j++) {
-   22|      0|        students[courseID][j] = students[courseID][j + 1];
-   23|      0|      }
-   24|      0|      students[courseID].pop_back();
-   25|      0|      break;
-   26|      0|    }
-   27|      0|  }
-   28|      0|}
-   29|       |
-   30|       |// // Return class list sorted by last name of students
-   31|       |// string getClassListByLastName(const string &courseNumber) const {
-   32|       |
-   33|       |//   return "abc";
-   34|       |// }
+    5|       |#include <iostream>
+    6|       |#include <sstream>
+    7|       |
+    8|       |using namespace std;
+    9|       |
+   10|  61.1k|Course::Course(const string &courseID) : courseID(courseID) {}
+   11|       |
+   12|       |Course::Course(const string &courseID, const string &courseName)
+   13|     79|    : courseID(courseID), courseName(courseName) {}
+   14|       |
+   15|      0|void Course::addStudent(Student *student) {
+   16|      0|  Student *answer = students[courseID][0];
+   17|      0|  answer->addCourse(student->studentID, courseID);
+   18|      0|}
+   19|       |
+   20|      0|void Course::removeStudent(Student *student) {
+   21|      0|  Student *answer = students[courseID][0];
+   22|      0|  answer->dropCourse(student->studentID, courseID);
+   23|      0|}
+   24|       |
+   25|     79|string Course::getClassListByLastName(const string &courseNumber) {
+   26|     79|  string ans = "1";
+   27|     79|  vector<Student *> value;
+   28|       |
+   29|       |  // for (Student *stu : students) {
+   30|       |  //   if (stu->isInCourse(stu->studentID, courseNumber)) {
+   31|       |  //     value.push_back(stu);
+   32|       |  //     ans = "here";
+   33|       |  //   }
+   34|       |  // }
    35|       |
-   36|       |// // Return class list sorted by id of students
-   37|       |// string getClassListByID(const string &courseNumber) const {}
-   38|       |
-   39|      0|bool Course::cmpLastName(const Student *stu1, const Student *stu2) {
-   40|      0|  return (stu1->studentLastName > stu2->studentLastName);
-   41|      0|}
-   42|       |
-   43|      0|bool Course::cmpID(const Student *stu1, const Student *stu2) {
-   44|      0|  return (stu1->studentID < stu2->studentID);
-   45|      0|}
+   36|     79|  sort(value.begin(), value.end(), cmpLastName);
+   37|       |  // ans = students[courseNumber][0]->studentLastName;
+   38|       |  //  ans += ", ";
+   39|       |  //  ans += students[courseNumber][0]->studentfirstName;
+   40|       |  //  ans += " (";
+   41|       |  //  ans += students[courseNumber][0]->studentID;
+   42|       |  //  ans += ")";
+   43|       |
+   44|       |  // for (int i = 1; i < students[courseNumber].size(); i++) {
+   45|       |  //   ans += ", ";
+   46|       |  //   ans += students[courseNumber][i]->studentLastName;
+   47|       |  //   ans += ", ";
+   48|       |  //   ans += students[courseNumber][i]->studentfirstName;
+   49|       |  //   ans += " (";
+   50|       |  //   ans += students[courseNumber][i]->studentID;
+   51|       |  //   ans += ")";
+   52|       |  // }
+   53|       |  // ans += "]";
+   54|     79|  return ans;
+   55|     79|}
+   56|       |
+   57|       |// Return class list sorted by id of students
+   58|      0|string Course::getClassListByID(const string &courseNumber) const {
+   59|      0|  return courseNumber;
+   60|      0|}
+   61|       |
+   62|      0|bool Course::cmpLastName(const Student *stu1, const Student *stu2) {
+   63|      0|  return stu1->studentLastName > stu2->studentLastName;
+   64|      0|}
+   65|       |
+   66|      0|bool Course::cmpID(const Student *stu1, const Student *stu2) {
+   67|      0|  return (stu1->studentID < stu2->studentID);
+   68|      0|}
 
 /home/cssuwbstudent/2023win342d-p5-AdonyasKibru/enrollmentsystem.cpp:
     1|       |#include "enrollmentsystem.h"
@@ -253,11 +302,11 @@ TOTAL                                                                           
    46|       |
    47|       |// Return the courses student is enrolled in
    48|       |// The returned courses are separated by commas and sorted by course name
-   49|      1|string EnrollmentSystem::getEnrolledCourses(int studentID) {
-   50|      1|  University *answer = universties[0];
-   51|      1|  string value = answer->getEnrolledCourses(studentID);
-   52|      1|  return value;
-   53|      1|}
+   49|      0|string EnrollmentSystem::getEnrolledCourses(int studentID) {
+   50|      0|  University *answer = universties[0];
+   51|      0|  string value = answer->getEnrolledCourses(studentID);
+   52|      0|  return value;
+   53|      0|}
    54|       |
    55|       |// Read the student list for current active university
    56|       |// return true if file successfully read
@@ -304,52 +353,34 @@ TOTAL                                                                           
    97|      1|  return value;
    98|      1|}
    99|       |
-  100|       |// string
-  101|       |// EnrollmentSystem::getClassListByLastName(const string &courseNumber) const {
-  102|       |//   vector<Student *> classList =
-  103|       |//   courses[courseNumber]->getClassListByLastName(); sort(classList.begin(),
-  104|       |//   classList.end(), cmpLastName);
-  105|       |//   // Format the class list into a string separated by commas
-  106|       |//   string result;
-  107|       |//   for (const auto student : classList) {
-  108|       |//     result += student->getFullName() + ", ";
-  109|       |//   }
-  110|       |//   // Remove the trailing comma and space
-  111|       |//   if (!result.empty()) {
-  112|       |//     result = result.substr(0, result.length() - 2);
-  113|       |//   }
-  114|       |//   return result;
-  115|       |// }
-  116|       |
-  117|       |// string EnrollmentSystem::getClassListByID(const string &courseNumber) const {
-  118|       |//   vector<Student *> classList = stu;
-  119|       |//   sort(classList.begin(), classList.end(), cmpID);
-  120|       |//   // Format the class list into a string separated by commas
-  121|       |//   string result;
-  122|       |//   for (const auto student : classList) {
-  123|       |//     result += student->studentLastName + ", ";
-  124|       |//   }
-  125|       |//   // Remove the trailing comma and space
-  126|       |//   if (!result.empty()) {
-  127|       |//     result = result.substr(0, result.length() - 2);
-  128|       |//   }
-  129|       |//   return result;
-  130|       |// }
-  131|       |
-  132|      0|bool EnrollmentSystem::cmpLastName(const Student *stu1, const Student *stu2) {
-  133|      0|  return (stu1->studentLastName < stu2->studentLastName);
-  134|      0|}
-  135|       |
-  136|      0|bool EnrollmentSystem::cmpID(const Student *stu1, const Student *stu2) {
-  137|      0|  return (stu1->studentID < stu2->studentID);
-  138|      0|}
-  139|       |
-  140|       |// Return the title for the course
-  141|      1|string EnrollmentSystem::getCourseTitle(const string &courseNumber) {
-  142|      1|  University *answer = universties[0];
-  143|      1|  string value = answer->getCourseTitle(courseNumber);
-  144|      1|  return value;
-  145|      1|}
+  100|      1|string EnrollmentSystem::getClassListByLastName(const string &courseNumber) {
+  101|      1|  University *answer = universties[0];
+  102|      1|  string value = answer->getClassListByLastName(courseNumber);
+  103|      1|  return value;
+  104|      1|}
+  105|       |
+  106|      0|string EnrollmentSystem::getClassListByID(const string &courseNumber) const {
+  107|      0|  return courseNumber;
+  108|      0|}
+  109|       |
+  110|      0|bool EnrollmentSystem::cmpLastName(const Student *stu1, const Student *stu2) {
+  111|      0|  University *answer = universties[0];
+  112|      0|  bool value = answer->cmpLastName(stu1,stu2);
+  113|      0|  return value;
+  114|      0|}
+  115|       |
+  116|      0|bool EnrollmentSystem::cmpID(const Student *stu1, const Student *stu2) {
+  117|      0|  University *answer = universties[0];
+  118|      0|  bool value = answer->cmpID(stu1,stu2);
+  119|      0|  return value;
+  120|      0|}
+  121|       |
+  122|       |// Return the title for the course
+  123|      1|string EnrollmentSystem::getCourseTitle(const string &courseNumber) {
+  124|      1|  University *answer = universties[0];
+  125|      1|  string value = answer->getCourseTitle(courseNumber);
+  126|      1|  return value;
+  127|      1|}
 
 /home/cssuwbstudent/2023win342d-p5-AdonyasKibru/main.cpp:
     1|       |
@@ -384,26 +415,29 @@ TOTAL                                                                           
    30|      0|  assert(es.getCourseTitle("CSS342") ==
    31|      1|         "Data Structures, Algorithms, and Discrete Mathematics I");
    32|       |  // // check enrollments
-   33|      0|  assert(es.getEnrolledCourses(1070) == "[CSS110, CSS173, CSS342]");
-   34|       |  // string c342byLastName =
-   35|       |  //     "[Collins, Cassandra (1070), Evans, Juan (1401), Gonzalez, Holly
-   36|       |  //     (1223), " "Henderson, Daniel (1364), Taylor, Alexander (1986),Thompson,
-   37|       |  //     Christine "
-   38|       |  //     "(1386), Watson, Alex (1211)]";
-   39|       |  // assert(es.getClassListByLastName("CSS342") == c342byLastName);
-   40|       |  //  string c342byID =
-   41|       |  //      "[Collins, Cassandra (1070), Watson, Alex (1211), Gonzalez, Holly "
-   42|       |  //      "(1223), Henderson, Daniel (1364), Thompson, Christine (1386), Evans,
-   43|       |  //      " "Juan (1401), Taylor, Alexander (1986)]";
-   44|       |  //  assert(es.getClassListByID("CSS342") == c342byID);
-   45|      1|}
-   46|       |
-   47|       |// run all tests
-   48|      1|int main() {
-   49|      1|  test1();
-   50|       |
-   51|      1|  cout << "Done." << endl;
-   52|      1|}
+   33|       |  //assert(es.getEnrolledCourses(1070) == "[CSS110, CSS173, CSS342]");
+   34|      0|  string c342byLastName =
+   35|      1|      "[Collins, Cassandra (1070), Evans, Juan (1401), Gonzalez, Holly (1223), "
+   36|      1|      "Henderson, Daniel (1364), Taylor, Alexander (1986),Thompson, Christine "
+   37|      1|      "(1386), Watson, Alex (1211)]";
+   38|      1|  stringstream outSS;
+   39|      1|  string skp = es.getClassListByLastName("CSS342");
+   40|      1|  outSS << skp;
+   41|      1|  cout << outSS.str();
+   42|       |  // assert(es.getClassListByLastName("CSS342") == c342byLastName);
+   43|       |  //  string c342byID =
+   44|       |  //      "[Collins, Cassandra (1070), Watson, Alex (1211), Gonzalez, Holly "
+   45|       |  //      "(1223), Henderson, Daniel (1364), Thompson, Christine (1386), Evans,
+   46|       |  //      " "Juan (1401), Taylor, Alexander (1986)]";
+   47|       |  //  assert(es.getClassListByID("CSS342") == c342byID);
+   48|      1|}
+   49|       |
+   50|       |// run all tests
+   51|      1|int main() {
+   52|      1|  test1();
+   53|       |
+   54|      1|  cout << "Done." << endl;
+   55|      1|}
 
 /home/cssuwbstudent/2023win342d-p5-AdonyasKibru/student.cpp:
     1|       |#include "student.h"
@@ -422,46 +456,46 @@ TOTAL                                                                           
    14|       |Student::Student(const int &idNumber, const string &lastname,
    15|       |                 const string &firstname)
    16|       |    : studentLastName(lastname), studentfirstName(firstname),
-   17|    150|      studentID(idNumber) {}
+   17|    137|      studentID(idNumber) {}
    18|       |
    19|       |// Drop student from given course, return true if successful
-   20|      1|bool Student::dropCourse(int studentID, const string &courseNumber) {
-   21|      1|  if (enrollmentInfo.find(studentID) != enrollmentInfo.end()) {
-   22|      1|    vector<Course *> &courses = enrollmentInfo[studentID];
+   20|      0|bool Student::dropCourse(int studentID, const string &courseNumber) {
+   21|      0|  if (enrollmentInfo.find(studentID) != enrollmentInfo.end()) {
+   22|      0|    vector<Course *> &courses = enrollmentInfo[studentID];
    23|       |
-   24|      3|    for (auto it = courses.begin(); it != courses.end(); ++it) {
-   25|      3|      if ((*it)->courseID == courseNumber) {
-   26|      1|        delete *it;
-   27|      1|        courses.erase(it);
-   28|      1|        return true;
-   29|      1|      }
-   30|      3|    }
-   31|      1|  }
+   24|      0|    for (auto it = courses.begin(); it != courses.end(); ++it) {
+   25|      0|      if ((*it)->courseID == courseNumber) {
+   26|      0|        delete *it;
+   27|      0|        courses.erase(it);
+   28|      0|        return true;
+   29|      0|      }
+   30|      0|    }
+   31|      0|  }
    32|       |
    33|      0|  return false;
-   34|      1|}
+   34|      0|}
    35|       |
-   36|  67.9k|bool Student::addCourse(int studentID, const string &courseNumber) {
-   37|  67.9k|  if (Student::isInCourse(studentID, courseNumber) ||
-   38|  67.9k|      ((studentID / 1000) == 0) || (courseNumber.length() != 6)) {
-   39|  1.05k|    return false;
-   40|  1.05k|  }
-   41|  66.9k|  enrollmentInfo[studentID].push_back(new Course(courseNumber));
-   42|  66.9k|  return true;
-   43|  67.9k|}
+   36|  62.0k|bool Student::addCourse(int studentID, const string &courseNumber) {
+   37|  62.0k|  if (Student::isInCourse(studentID, courseNumber) ||
+   38|  62.0k|      ((studentID / 1000) == 0) || (courseNumber.length() != 6)) {
+   39|    959|    return false;
+   40|    959|  }
+   41|  61.1k|  enrollmentInfo[studentID].push_back(new Course(courseNumber));
+   42|  61.1k|  return true;
+   43|  62.0k|}
    44|       |
    45|       |// Return true if student is in the given course
-   46|  67.9k|bool Student::isInCourse(int studentID, const string &courseNumber) const {
-   47|  67.9k|  const auto &enrolledCourses = enrollmentInfo.find(studentID);
-   48|  67.9k|  if (enrolledCourses != enrollmentInfo.end()) {
-   49|  84.7k|    for (const auto &course : enrolledCourses->second) {
-   50|  84.7k|      if (course->courseID == courseNumber) {
-   51|    750|        return true;
-   52|    750|      }
-   53|  84.7k|    }
-   54|  47.1k|  }
-   55|  67.2k|  return false;
-   56|  67.9k|}
+   46|  62.0k|bool Student::isInCourse(int studentID, const string &courseNumber) const {
+   47|  62.0k|  const auto &enrolledCourses = enrollmentInfo.find(studentID);
+   48|  62.0k|  if (enrolledCourses != enrollmentInfo.end()) {
+   49|  77.4k|    for (const auto &course : enrolledCourses->second) {
+   50|  77.4k|      if (course->courseID == courseNumber) {
+   51|    685|        return true;
+   52|    685|      }
+   53|  77.4k|    }
+   54|  43.0k|  }
+   55|  61.3k|  return false;
+   56|  62.0k|}
 
 /home/cssuwbstudent/2023win342d-p5-AdonyasKibru/university.cpp:
     1|       |#include "university.h"
@@ -477,14 +511,14 @@ TOTAL                                                                           
    11|      3|University::University(const string &name) : universityName(name) {}
    12|       |
    13|      3|University::~University() {
-   14|    150|  for (Student *student : uniStudents) {
-   15|  20.7k|    for (auto &enrollment : student->enrollmentInfo) {
-   16|  66.8k|      for (Course *course : enrollment.second) {
-   17|  66.8k|        delete course;
-   18|  66.8k|      }
-   19|  20.7k|    }
-   20|    150|    delete student;
-   21|    150|  }
+   14|    137|  for (const auto &pair : uniStudents) {
+   15|  18.9k|    for (auto &enrollment : pair.second->enrollmentInfo) {
+   16|  61.1k|      for (Course *course : enrollment.second) {
+   17|  61.1k|        delete course;
+   18|  61.1k|      }
+   19|  18.9k|    }
+   20|    137|    delete pair.second;
+   21|    137|  }
    22|       |
    23|     79|  for (Course *course : Courses) {
    24|     79|    delete course;
@@ -510,147 +544,172 @@ TOTAL                                                                           
    44|       |
    45|    150|    stringstream studentData(line);
    46|    150|    studentData >> stuID >> firstName >> lastName;
-   47|    150|    uniStudents.push_back(new Student(stuID, lastName, firstName));
-   48|    150|  }
-   49|      1|  loadFile.close();
-   50|      1|  return true;
-   51|      1|}
-   52|       |
-   53|       |// Read the course list for current active university
-   54|       |// return true if file successfully read
-   55|      1|bool University::readCourseList(const string &filename) {
-   56|      1|  ifstream loadFile;
-   57|      1|  loadFile.open(filename);
-   58|       |
-   59|      1|  if (!loadFile.is_open()) {
-   60|      0|    cerr << "The file " << filename << "  is not open";
-   61|      0|    return false;
-   62|      0|  }
-   63|       |
-   64|      1|  string line;
+   47|    150|    if (uniStudents.find(stuID) == uniStudents.end()) {
+   48|    137|      uniStudents[stuID] = new Student(stuID, lastName, firstName);
+   49|    137|    }
+   50|    150|  }
+   51|      1|  loadFile.close();
+   52|      1|  return true;
+   53|      1|}
+   54|       |
+   55|       |// Read the course list for current active university
+   56|       |// return true if file successfully read
+   57|      1|bool University::readCourseList(const string &filename) {
+   58|      1|  ifstream loadFile;
+   59|      1|  loadFile.open(filename);
+   60|       |
+   61|      1|  if (!loadFile.is_open()) {
+   62|      0|    cerr << "The file " << filename << "  is not open";
+   63|      0|    return false;
+   64|      0|  }
    65|       |
-   66|     80|  while (getline(loadFile, line)) {
-   67|     79|    string shortName;
-   68|     79|    string longName = "";
-   69|       |
-   70|     79|    stringstream ssLine(line);
-   71|     79|    ssLine >> shortName;
-   72|     79|    string val;
-   73|     79|    ssLine >> val;
-   74|     79|    longName += val;
-   75|       |
-   76|    303|    while (ssLine >> val) {
-   77|    224|      longName += " ";
-   78|    224|      longName += val;
-   79|    224|    }
-   80|     79|    Courses.push_back(new Course(shortName, longName));
-   81|     79|  }
-   82|       |
-   83|      1|  loadFile.close();
-   84|      1|  return true;
-   85|      1|}
-   86|       |
-   87|       |// Read the student enrollment information for current active university
-   88|       |// return true if file successfully read
-   89|      1|bool University::readEnrollmentInfo(const string &filename) {
-   90|      1|  ifstream loadFile;
-   91|      1|  loadFile.open(filename);
-   92|       |
-   93|      1|  if (!loadFile.is_open()) {
-   94|      0|    cerr << "This file " << filename << " is not opened." << endl;
-   95|      0|    return false;
-   96|      0|  }
-   97|       |
-   98|      1|  string line;
-   99|    451|  while (getline(loadFile, line)) {
-  100|    450|    int id;
-  101|    450|    string shortName;
-  102|       |
-  103|    450|    stringstream ss(line);
-  104|    450|    ss >> id >> shortName;
-  105|       |
-  106|  67.5k|    for (Student *value : uniStudents) {
-  107|  67.5k|      value->addCourse(id, shortName);
-  108|  67.5k|    }
-  109|    450|  }
-  110|       |
-  111|      1|  loadFile.close();
-  112|      1|  return true;
-  113|      1|}
-  114|       |
-  115|       |// Drop student from given course, return true if successful
-  116|      1|bool University::dropCourse(int studentID, const string &courseNumber) {
-  117|      1|  for (Student *student : uniStudents) {
-  118|      1|    if (student->dropCourse(studentID, courseNumber))
-  119|      1|      return true;
-  120|      1|  }
-  121|      0|  return false;
-  122|      1|}
-  123|       |
-  124|      3|bool University::addCourse(int studentID, const string &courseNumber) {
-  125|      3|  bool ans = false;
-  126|    450|  for (Student *student : uniStudents) {
-  127|    450|    if (student->addCourse(studentID, courseNumber)) {
-  128|    150|      ans = true;
-  129|    150|    }
-  130|    450|  }
-  131|      3|  return ans;
-  132|      3|}
-  133|       |
-  134|       |// Return true if student is in the given course
-  135|      1|bool University::isInCourse(int studentID, const string &courseNumber) const {
-  136|    128|  for (const Student *student : uniStudents) {
-  137|    128|    if (student->studentID == studentID) {
-  138|      1|      return student->isInCourse(studentID, courseNumber);
-  139|      1|    }
-  140|    128|  }
-  141|      0|  return false;
-  142|      1|}
-  143|       |
-  144|       |// Return the courses student is enrolled in
-  145|       |// The returned courses are separated by commas and sorted by course name
-  146|      1|string University::getEnrolledCourses(int studentID) const {
-  147|      1|  string ans = "[";
-  148|      1|  Student *value = uniStudents[0];
-  149|      1|  ans = ans + value->enrollmentInfo[studentID][0]->courseID;
-  150|      3|  for (int i = 1; i < value->enrollmentInfo[studentID].size(); i++) {
-  151|      2|    ans += ", ";
-  152|      2|    ans += value->enrollmentInfo[studentID][i]->courseID;
-  153|      2|  }
-  154|      1|  ans += "]";
-  155|      1|  return ans;
-  156|      1|}
-  157|       |
-  158|       |// vector<Student *> University::getClassListByLastName() {
-  159|       |//   // sort(students.begin(), students.end(), cmpLastName);
-  160|       |//   return students;
-  161|       |// }
-  162|       |
-  163|       |// vector<Student *> University::getClassListByID() {
-  164|       |//   // sort(students.begin(), students.end(), cmpID);
-  165|       |//   return students;
-  166|       |// }
-  167|       |
-  168|      0|bool University::cmpLastName(const Student *stu1, const Student *stu2) {
-  169|      0|  return (stu1->studentLastName > stu2->studentLastName);
-  170|      0|}
-  171|       |
-  172|      0|bool University::cmpID(const Student *stu1, const Student *stu2) {
-  173|      0|  return (stu1->studentID > stu2->studentID);
-  174|      0|}
-  175|       |
-  176|       |// Return the title for the course
-  177|      1|string University::getCourseTitle(const string &courseNumber) {
-  178|      1|  string answer;
-  179|     79|  for (Course *val : Courses) {
-  180|     79|    if (val->courseID == courseNumber) {
-  181|      1|      answer = val->courseName;
-  182|      1|    }
-  183|     79|  }
-  184|      1|  return answer;
-  185|      1|}
+   66|      1|  string line;
+   67|       |
+   68|     80|  while (getline(loadFile, line)) {
+   69|     79|    string shortName;
+   70|     79|    string longName = "";
+   71|       |
+   72|     79|    stringstream ssLine(line);
+   73|     79|    ssLine >> shortName;
+   74|     79|    string val;
+   75|     79|    ssLine >> val;
+   76|     79|    longName += val;
+   77|       |
+   78|    303|    while (ssLine >> val) {
+   79|    224|      longName += " ";
+   80|    224|      longName += val;
+   81|    224|    }
+   82|     79|    Courses.push_back(new Course(shortName, longName));
+   83|     79|  }
+   84|       |
+   85|      1|  loadFile.close();
+   86|      1|  return true;
+   87|      1|}
+   88|       |
+   89|       |// Read the student enrollment information for current active university
+   90|       |// return true if file successfully read
+   91|      1|bool University::readEnrollmentInfo(const string &filename) {
+   92|      1|  ifstream loadFile;
+   93|      1|  loadFile.open(filename);
+   94|       |
+   95|      1|  if (!loadFile.is_open()) {
+   96|      0|    cerr << "This file " << filename << " is not opened." << endl;
+   97|      0|    return false;
+   98|      0|  }
+   99|       |
+  100|      1|  string line;
+  101|    451|  while (getline(loadFile, line)) {
+  102|    450|    int stuID;
+  103|    450|    string shortName;
+  104|       |
+  105|    450|    stringstream ss(line);
+  106|    450|    ss >> stuID >> shortName;
+  107|       |
+  108|  61.6k|    for (const auto &pair : uniStudents) {
+  109|  61.6k|      if (pair.second->addCourse(stuID, shortName)) {
+  110|  4.81M|        for (Course *val : Courses) {
+  111|  4.81M|          if (pair.second->studentID == stuID) {
+  112|  34.9k|            val->students[shortName].push_back(pair.second);
+  113|  34.9k|          }
+  114|  4.81M|        }
+  115|  60.9k|      }
+  116|  61.6k|    }
+  117|    450|  }
+  118|       |
+  119|      1|  loadFile.close();
+  120|      1|  return true;
+  121|      1|}
+  122|       |
+  123|       |// Drop student from given course, return true if successful
+  124|      1|bool University::dropCourse(int studentID, const string &courseNumber) {
+  125|       |  // for (Student *student : uniStudents) {
+  126|       |  //   if (student->dropCourse(studentID, courseNumber))
+  127|       |  //     return true;
+  128|       |  // }
+  129|      1|  return true;
+  130|      1|}
+  131|       |
+  132|      3|bool University::addCourse(int studentID, const string &courseNumber) {
+  133|      3|  bool ans = false;
+  134|    411|  for (const auto &pair : uniStudents) {
+  135|    411|    if (pair.second->addCourse(studentID, courseNumber)) {
+  136|    137|      ans = true;
+  137|  10.8k|      for (Course *val : Courses) {
+  138|  10.8k|        if (pair.second->studentID == studentID) {
+  139|     79|          val->students[courseNumber].push_back(pair.second);
+  140|     79|        }
+  141|  10.8k|      }
+  142|    137|    }
+  143|    411|  }
+  144|      3|  return ans;
+  145|      3|}
+  146|       |
+  147|       |// Return true if student is in the given course
+  148|      1|bool University::isInCourse(int studentID, const string &courseNumber) const {
+  149|     10|  for (const auto &pair : uniStudents) {
+  150|     10|    if (pair.second->studentID == studentID) {
+  151|      1|      return pair.second->isInCourse(studentID, courseNumber);
+  152|      1|    }
+  153|     10|  }
+  154|      0|  return false;
+  155|      1|}
+  156|       |
+  157|       |// Return the courses student is enrolled in
+  158|       |// The returned courses are separated by commas and sorted by course name
+  159|      0|string University::getEnrolledCourses(int studentID) const {
+  160|      0|  string ans = "[";
+  161|      0|  Student *value;
+  162|      0|  for (const auto pair : uniStudents) {
+  163|      0|    value = pair.second;
+  164|      0|  }
+  165|      0|  ans = ans + value->enrollmentInfo[studentID][0]->courseID;
+  166|      0|  for (int i = 1; i < value->enrollmentInfo[studentID].size(); i++) {
+  167|      0|    ans += ", ";
+  168|      0|    ans += value->enrollmentInfo[studentID][i]->courseID;
+  169|      0|  }
+  170|      0|  ans += "]";
+  171|      0|  return ans;
+  172|      0|}
+  173|       |
+  174|       |// Return class list sorted by last name of students
+  175|      1|string University::getClassListByLastName(const string &courseNumber) {
+  176|      1|  string answer;
+  177|     79|  for (Course *val : Courses) {
+  178|     79|    answer = val->getClassListByLastName(courseNumber);
+  179|     79|  }
+  180|      1|  return answer;
+  181|      1|}
+  182|       |// Return class list sorted by id of students
+  183|      0|string University::getClassListByID(const string &courseNumber) const {
+  184|      0|  return courseNumber;
+  185|      0|}
+  186|       |
+  187|      0|bool University::cmpLastName(const Student *stu1, const Student *stu2) {
+  188|      0|  bool answer;
+  189|      0|  Course *val = Courses[0];
+  190|      0|  answer = val->cmpLastName(stu1, stu2);
+  191|      0|  return answer;
+  192|      0|}
+  193|       |
+  194|      0|bool University::cmpID(const Student *stu1, const Student *stu2) {
+  195|      0|  bool answer;
+  196|      0|  Course *val = Courses[0];
+  197|      0|  answer = val->cmpID(stu1, stu2);
+  198|      0|  return answer;
+  199|      0|}
+  200|       |
+  201|       |// Return the title for the course
+  202|      1|string University::getCourseTitle(const string &courseNumber) {
+  203|      1|  string answer;
+  204|     79|  for (Course *val : Courses) {
+  205|     79|    if (val->courseID == courseNumber) {
+  206|      1|      answer = val->courseName;
+  207|      1|    }
+  208|     79|  }
+  209|      1|  return answer;
+  210|      1|}
 
-Sun Jun  4 05:26:58 UTC 2023
+Mon Jun  5 02:01:23 UTC 2023
 =====================================================
 To create an output.txt file with all the output from this script
 Run the below command

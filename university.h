@@ -48,7 +48,7 @@ public:
 
 private:
   string universityName;
-  vector<Student *> uniStudents;
+  unordered_map<int, Student *> uniStudents;
   vector<Course *> Courses;
 };
 
